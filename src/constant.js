@@ -1,4 +1,4 @@
-export const ResturantObj = [
+/*export const ResturantObj = [
   {
       resturentname:'Burger King',
       image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-_T_K9NMH6mOMrokvdfx1FDQE5JlRoVvR3AmFRdg5bo9fbnmCRO65DZUHN5guU_KZz8Y&usqp=CAU",
@@ -13,17 +13,11 @@ export const ResturantObj = [
       cusine:"Sandwitch",
       Rating:4.5,
       id:102
-    },
-    {
-      
       resturentname:'Mac Ramen',
       image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdrwFH450_QAk6ogFWt0uTqR91jWK3HowU4w&s",
       cusine:"Ramen",
       Rating:3.5,
       id:103
-    },
-    {
-      
       resturentname:'KFC',
       image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgluOwq3hw6EKloGHdBuemDn718-3V3jdg8w&s",
       cusine:"Chicken",
@@ -32,3 +26,12 @@ export const ResturantObj = [
     }
   
   ];
+  */
+
+export const titles = {
+  "/" : "E-Commers Site",
+  "/about" : "About",
+  "/contact" : "Contact",
+  "/blog" : "Blog",
+  "/products/:title/:id" : "Products Details"
+};
