@@ -11,6 +11,9 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import Header from './Components/Header.jsx';
 import Footer from './Components/Footer.jsx';
 import {titles} from "./constant.js"
+import Women from './Components/blog/Women.jsx';
+import Mens from './Components/blog/Mens.jsx';
+import Kids from './Components/blog/Kids.jsx';
 
 
    const DynamicTitle = () => {
@@ -32,7 +35,12 @@ createRoot(document.getElementById('root')).render(
       <Route path="/" element = {<App/>}/>
       <Route path="/about" element = {<About />}/>
       <Route path="/contact" element = {<Contact />}/>
-      <Route path='/blog' element= {<Blog/>} />
+      <Route path='/blog' element= {<Blog/>}>
+      {/* Nested Routes */}
+      <Route path='' index element= {<Women />}/>
+      <Route path='mensfashion' element= {<Mens />}/>
+      <Route path='kidsfashion' element= {<Kids/>}/>
+      </Route>
       {/* Dynamic route */}
       <Route path='/products/:title/:id' element ={<ProductDescp/>}></Route>
       <Route path='/*' element={<Navigate to={"/"}/>}/>
