@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router";
 import logo from "../assets/e-com-logo.png"
 import { useState } from "react";
+import useOnline from "../Utils/useOnline";
 
 
 
@@ -19,7 +20,7 @@ const Header =() => {
       navigate("/")
     }
   }
-  console.log(isLogedin)
+const isOnline = useOnline();
   return (
     <nav className='nav'>
       <img src={logo} alt="logo" style={{height:"120px"}} />
@@ -30,6 +31,7 @@ const Header =() => {
           <li><NavLink to={"/blog"}>Blog</NavLink></li>
           <li><button onClick={login}>Login</button></li>
           <li><button onClick={move}>Move</button></li>
+          <li>{isOnline? "🟢":"🔴"}</li>
       </ul>
     </nav>
   )

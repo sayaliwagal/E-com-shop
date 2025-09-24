@@ -32,6 +32,8 @@ export const titles = {
   "/" : "E-Commers Site",
   "/about" : "About",
   "/contact" : "Contact",
-  "/blog" : "Blog",
+  "/blog" : "Womens Fashion Blog",
+  "/blog/mensfashion" : "Mens Fashion Blog",
+  "/blog/kidsfashion" : "Kids Fashion Blog",
   "/products/:title/:id" : "Products Details"
 };

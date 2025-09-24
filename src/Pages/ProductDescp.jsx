@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import useCallApi from '../Utils/useCallApi';
+
 
 const ProductDescp = () => {
     const {title, id}= useParams();
     console.log(id)
-    const [singleData, setSingleData] = useState({});
+    const singleData = useCallApi(`https://dummyjson.com/products/${id}`);
 
-    useEffect(()=>{
-        fetch(`https://dummyjson.com/products/${id}`)
-        .then(res => res.json())
-        .then((data) =>{
-            setSingleData(data);
-        });
-    }, [])
     console.log(singleData)
   return (
     <div className='products-main'>
@@ -32,12 +27,12 @@ const ProductDescp = () => {
             </div>
         </div>
         <div className="right">
-            <h2>{singleData.title}</h2>
-            <p> {singleData.brand}</p>
-            <p>{singleData.description}</p>
-            <p>{singleData.category}</p>
-            <p>{singleData.price}</p>
-            <p>rating: {singleData.rating}</p>
+            <h2>{singleData?.title}</h2>
+            <p> {singleData?.brand}</p>
+            <p>{singleData?.description}</p>
+            <p>{singleData?.category}</p>
+            <p>{singleData?.price}</p>
+            <p>rating: {singleData?.rating}</p>
             
         </div>
     </div>
