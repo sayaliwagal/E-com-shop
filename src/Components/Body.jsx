@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { Card } from "./Card";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import { filterValues } from "../Utils/helper";
 import useCallApi from "../Utils/useCallApi";
@@ -10,31 +10,24 @@ const Body = () => {
   const [filterProducts, setFilterProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  // const filterValues = () => {
-  //   const filterProduct = filterProducts.filter((value, i) => {
-  //     return value.title.toLowerCase().includes(searchText.toLowerCase());
 
-  //   });
-  //   setFilterProducts(filterProduct);
-
-  // };
-  //  Function to fetch api
   const data = useCallApi("https://dummyjson.com/products");
-  /*async() => {
-        const responce = await fetch("https://dummyjson.com/products")
-        const data = await responce.json();
-        // console.log(data);
-        setProducts(data.products)
-        setFilterProducts(data.products);
-        } */
+
   //useeffect for api fetching
   useEffect(() => {
     setProducts(data.products);
     setFilterProducts(data.products);
   }, [data]);
-  // console.log("filter data :", filterProducts)
 
-
+  const ref = useRef("");
+ const  handleRef = () => {
+    ref.current.focus();
+    ref.current.style.backgroundColor ="gray"
+  }
+  useEffect(() => {
+     handleRef();
+  }, [])
+  console.log(ref);
   return (
     <>
       <h3 className="h3">Products List</h3>
@@ -42,6 +35,7 @@ const Body = () => {
         type="search"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
+        ref={ref}
       />
       <button
         onClick={() => {
