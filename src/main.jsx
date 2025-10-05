@@ -8,33 +8,14 @@ import Contact from './Pages/Contact.jsx'
 const Blog = lazy(() =>(import("./Pages/Blog.jsx")))
 import Error from './Pages/Error.jsx'
 import ProductDescp from './Pages/ProductDescp.jsx';
-import { BrowserRouter, Routes, Route, Navigate, useLocation, matchPath } from 'react-router';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router';
 import Header from './Components/Header.jsx';
 import Footer from './Components/Footer.jsx';
-import {titles} from "./constant.js"
 import Women from './Components/blog/Women.jsx';
 import Mens from './Components/blog/Mens.jsx';
 import Kids from './Components/blog/Kids.jsx';
+import DynamicTitle from './Components/DynamicTitle.jsx';
 
-
-   const DynamicTitle = () => {
-    const location = useLocation();
-    console.log(location);
-     useEffect(() =>{
-      let newTitle = titles[location.pathname];
-
-      if(!newTitle){
-        //check dynamic rote
-        const match = matchPath("/products/:title/:id", location.pathname);
-        if(match){
-          const {title, id} = match.params;
-          newTitle = `${title} | Product #${id}`;
-        }
-      }
-      document.title = newTitle;
-     },[location.pathname])
-   return null;
-   }
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
