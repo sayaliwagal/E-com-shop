@@ -5,10 +5,11 @@ import { ShimmerThumbnail } from "react-shimmer-effects";
 import { filterValues } from "../Utils/helper";
 import useCallApi from "../Utils/useCallApi";
 // import useOnline from "../Utils/useOnline";
-const Body = () => {
+const Body = ({addToCart}) => {
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [loading, setLoading] = useState(true);
 
 
   const data = useCallApi("https://dummyjson.com/products");
@@ -17,6 +18,7 @@ const Body = () => {
   useEffect(() => {
     setProducts(data.products);
     setFilterProducts(data.products);
+    setLoading(false);
   }, [data]);
 
   const ref = useRef("");
@@ -45,25 +47,20 @@ const Body = () => {
         Search
       </button>
       <div className="main-card">
-        {filterProducts?.length == 0 ? (
+        {loading? (
           <>
             <div className="main-card">
-              {Array.from({ length: 30 }).map((item) => {
+              {Array.from({ length: 30 }).map((item,index) => {
                 return (
-                  <ShimmerThumbnail index={item} height={300} width={250} />
+                  <ShimmerThumbnail key={index} index={item} height={300} width={250} />
                 );
               })}
             </div>
           </>
         ) : (
-          filterProducts?.map((item, index) => {
+          filterProducts?.map((item) => {
             return (
-              <Link
-                to={`/products/${item.title.split(" ").join("-")}/${item.id}`}
-                key={item.id}
-              >
-                <Card products={item} />
-              </Link>
+                <Card key ={item.id} products={item}  addToCart ={addToCart} />
             );
           })
         )}

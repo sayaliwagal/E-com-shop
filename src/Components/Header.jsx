@@ -5,7 +5,7 @@ import useOnline from "../Utils/useOnline";
 
 
 
-const Header =() => {
+const Header =({length}) => {
 
   const [isLogedin, setIsLogedin] = useState(false);
   const navigate = useNavigate();
@@ -29,9 +29,7 @@ const isOnline = useOnline();
           <li><NavLink to={"/about"}>About</NavLink></li>
           <li><NavLink to={"/contact"}>Contact</NavLink></li>
           <li><NavLink to={"/blog"}>Blog</NavLink></li>
-          <li><button onClick={login}>Login</button></li>
-          <li><button onClick={move}>Move</button></li>
-          <li>{isOnline? "🟢":"🔴"}</li>
+          <li><NavLink to={"/cart"} >Cart <span>{length}</span></NavLink></li>
       </ul>
     </nav>
   )

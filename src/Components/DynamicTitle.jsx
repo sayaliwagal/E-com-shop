@@ -1,10 +1,9 @@
-  
   import { useLocation, matchPath, } from "react-router";
   import {titles} from "../constant.js"
   import { useEffect } from "react";
 const DynamicTitle = () => {
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
      useEffect(() =>{
       let newTitle = titles[location.pathname];
 

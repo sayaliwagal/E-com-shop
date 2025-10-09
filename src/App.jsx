@@ -4,7 +4,7 @@ import Body from './Components/Body';
 import useOnline from './Utils/useOnline';
 
 
-function App() {
+function App({addToCart}) {
     const isOnline = useOnline();
   if (!isOnline) {
     return (
@@ -16,7 +16,7 @@ function App() {
  return(
   <>
   
-    <Body/>
+    <Body addToCart ={addToCart}/>
  </>
   ) 
 }  

@@ -35,5 +35,6 @@ export const titles = {
   "/blog" : "Womens Fashion Blog",
   "/blog/mensfashion" : "Mens Fashion Blog",
   "/blog/kidsfashion" : "Kids Fashion Blog",
-  // "/products/:title/:id" : "Products Details"
+  "/products/:title/:id" : "Products Details",
+  "/cart" : "Cart",
 };
