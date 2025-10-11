@@ -5,7 +5,7 @@ import { ShimmerThumbnail } from "react-shimmer-effects";
 import { filterValues } from "../Utils/helper";
 import useCallApi from "../Utils/useCallApi";
 // import useOnline from "../Utils/useOnline";
-const Body = ({addToCart}) => {
+const Body = () => {
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -29,7 +29,7 @@ const Body = ({addToCart}) => {
   useEffect(() => {
      handleRef();
   }, [])
-  console.log(ref);
+  // console.log(ref);
   return (
     <>
       <h3 className="h3">Products List</h3>
@@ -60,7 +60,10 @@ const Body = ({addToCart}) => {
         ) : (
           filterProducts?.map((item) => {
             return (
-                <Card key ={item.id} products={item}  addToCart ={addToCart} />
+                <Card key ={item.id} products={item}>
+                  {/* <p>hello</p> */}
+                </Card>
+                
             );
           })
         )}

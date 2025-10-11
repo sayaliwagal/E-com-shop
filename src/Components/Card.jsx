@@ -1,9 +1,13 @@
+import { useContext } from "react";
 import { Link } from "react-router";
+import CartContext from "../Utils/Context/CartContext";
+
 
 export const Card = (props) => {
-  const {products, addToCart} = props;
-  // console.log(products)
+  console.log(props);
+  const {products} = props;
   const {thumbnail, title, category, price, rating, id} = products;
+  const {addCart} = useContext(CartContext);
       return(
         <>
           <div className="card">
@@ -16,7 +20,8 @@ export const Card = (props) => {
             <h3>$ {price}</h3>
             <p className="rating">{rating.rate}</p>
           </Link>
-          <button onClick={() => addToCart(products)}>Add To Cart</button>
+          <p>{props.children}</p>
+          <button onClick={() => addCart(products)}>Add To Cart</button>
           </div>
         </>
       )

@@ -16,22 +16,16 @@ import {  Routes, Route, Navigate } from 'react-router';
 
 
 const Layout = () => {
-  const [cart, setCart] = useState([]);
-
-  const addToCart = (products) => {
-    console.log("Data Added")
-    setCart([...cart, products]);
-  }
-  
+   
   return (
     <>
-     <Header length = {cart.length} />
+     <Header/>
      <Routes>
       {/* Static route */}
-      <Route path="/" element = {<App addToCart ={addToCart}/>}/>
+      <Route path="/" element = {<App />}/>
       <Route path="/about" element = {<About />}/>
       <Route path="/contact" element = {<Contact />}/>
-      <Route path="/cart" element = {<Cart cart={cart} />}/>
+      <Route path="/cart" element = {<Cart />}/>
       <Route path='/blog' element= {<Suspense fallback={<h2> Loadding....</h2>}><Blog/></Suspense>}>
       {/* Nested Routes */}
       <Route path='' index element= {<Women />}/>

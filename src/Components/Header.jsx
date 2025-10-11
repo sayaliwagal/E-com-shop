@@ -1,13 +1,15 @@
 import { NavLink, useNavigate } from "react-router";
 import logo from "../assets/e-com-logo.png"
-import { useState } from "react";
+import { useContext,useState } from "react";
 import useOnline from "../Utils/useOnline";
+import CartContext from "../Utils/Context/CartContext";
 
 
 
-const Header =({length}) => {
+const Header =() => {
 
   const [isLogedin, setIsLogedin] = useState(false);
+  const {cart} = useContext(CartContext);
   const navigate = useNavigate();
   const login = () => {
     setIsLogedin(true);
@@ -29,7 +31,9 @@ const isOnline = useOnline();
           <li><NavLink to={"/about"}>About</NavLink></li>
           <li><NavLink to={"/contact"}>Contact</NavLink></li>
           <li><NavLink to={"/blog"}>Blog</NavLink></li>
-          <li><NavLink to={"/cart"} >Cart <span>{length}</span></NavLink></li>
+          <li><NavLink to={"/cart"} >Cart <span>
+            {cart.length}
+            </span></NavLink></li>
       </ul>
     </nav>
   )
