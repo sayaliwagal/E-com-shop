@@ -22,6 +22,7 @@ const Header =() => {
       navigate("/")
     }
   }
+  const {auth, logout} = useContext(CartContext);
 const isOnline = useOnline();
   return (
     <nav className='nav'>
@@ -31,9 +32,9 @@ const isOnline = useOnline();
           <li><NavLink to={"/about"}>About</NavLink></li>
           <li><NavLink to={"/contact"}>Contact</NavLink></li>
           <li><NavLink to={"/blog"}>Blog</NavLink></li>
-          <li><NavLink to={"/cart"} >Cart <span>
-            {cart.length}
-            </span></NavLink></li>
+          <li><NavLink to={"/cart"} >Cart <span>{cart.length}</span></NavLink></li> 
+          {!auth && <li><NavLink to={"/login"}>Login</NavLink></li>}
+          {auth && <li><button onClick={logout}>Logout</button></li>}
       </ul>
     </nav>
   )

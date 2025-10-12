@@ -4,7 +4,7 @@ import CartContext from "../Utils/Context/CartContext";
 
 
 export const Card = (props) => {
-  console.log(props);
+  // console.log(props);
   const {products} = props;
   const {thumbnail, title, category, price, rating, id} = products;
   const {addCart} = useContext(CartContext);

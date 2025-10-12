@@ -5,6 +5,7 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [auth, setAuth] = useState(false);
   const addCart = (product) => {
     console.log("data added");
     const exists = cart.find((item) => {
@@ -68,9 +69,20 @@ export const CartProvider = ({ children }) => {
        return tPrice;
     }
 
+    //login feature
+    const login = () =>{
+      setAuth(true);
+      toast.success("Logged in successfully ");
+    }
+
+    const logout = () => {
+      setAuth(false);
+      toast.success("Log out successfully");
+    }
+
     
   return (
-    <CartContext.Provider value={{ cart, addCart, clearCart, removeProduct, increaseQty, decreaseQty, totalPrice}}>
+    <CartContext.Provider value={{ cart, addCart, clearCart, removeProduct, increaseQty, decreaseQty, totalPrice, login, logout, auth}}>
       {children}
     </CartContext.Provider>
   );

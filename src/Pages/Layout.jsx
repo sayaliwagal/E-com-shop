@@ -13,6 +13,8 @@ import Women from '../Components/blog/Women.jsx';
 import Mens from '../Components/blog/Mens.jsx';
 import Kids from '../Components/blog/Kids.jsx';
 import {  Routes, Route, Navigate } from 'react-router';
+import LoginPage from './LoginPage.jsx';
+import ProtectedRoute from './ProtectedRoute.jsx';
 
 
 const Layout = () => {
@@ -25,7 +27,7 @@ const Layout = () => {
       <Route path="/" element = {<App />}/>
       <Route path="/about" element = {<About />}/>
       <Route path="/contact" element = {<Contact />}/>
-      <Route path="/cart" element = {<Cart />}/>
+      <Route path="/cart" element = {<ProtectedRoute><Cart/></ProtectedRoute>}/>
       <Route path='/blog' element= {<Suspense fallback={<h2> Loadding....</h2>}><Blog/></Suspense>}>
       {/* Nested Routes */}
       <Route path='' index element= {<Women />}/>
@@ -34,6 +36,7 @@ const Layout = () => {
       </Route>
       {/* Dynamic route */}
       <Route path='/products/:title/:id' element ={<ProductDescp/>}></Route>
+      <Route path='/login' element ={<LoginPage />}></Route>
       <Route path='/*' element={<Navigate to={"/"}/>}/>
      </Routes>
       <Footer /> 
