@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import CartContext from "../Utils/Context/CartContext";
 import { FaPlus, FaMinus } from "react-icons/fa";
-// import { FaMinus } from "react-icons/fa";
+
 
 const Cart = () => {
   const { cart, clearCart, removeProduct, increaseQty, decreaseQty, totalPrice } = useContext(CartContext);

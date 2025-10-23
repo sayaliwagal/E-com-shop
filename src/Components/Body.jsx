@@ -12,13 +12,15 @@ const Body = () => {
   const [loading, setLoading] = useState(true);
 
 
-  const data = useCallApi("https://dummyjson.com/products");
+  const data = useCallApi("https://dummyjson.com/products?limit=0");
 
+  
   //useeffect for api fetching
   useEffect(() => {
     setProducts(data.products);
     setFilterProducts(data.products);
     setLoading(false);
+    console.log(data.products);
   }, [data]);
 
   const ref = useRef("");

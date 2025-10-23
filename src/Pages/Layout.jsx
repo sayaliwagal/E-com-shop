@@ -18,13 +18,15 @@ import ProtectedRoute from './ProtectedRoute.jsx';
 
 
 const Layout = () => {
+  //lift search 
+   const [searchText, setSearchText] = useState("");
    
   return (
     <>
-     <Header/>
+     <Header searchText={searchText} setSearchText={setSearchText}/>
      <Routes>
       {/* Static route */}
-      <Route path="/" element = {<App />}/>
+      <Route path="/" element = {<App searchText={searchText} />}/>
       <Route path="/about" element = {<About />}/>
       <Route path="/contact" element = {<Contact />}/>
       <Route path="/cart" element = {<ProtectedRoute><Cart/></ProtectedRoute>}/>
