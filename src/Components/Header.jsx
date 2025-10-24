@@ -5,6 +5,7 @@ import useOnline from "../Utils/useOnline";
 import CartContext from "../Utils/Context/CartContext";
 import ResponsiveMenu from "./ResponsiveMenu.jsx";
 import { BsCart2 } from "react-icons/bs";
+import { FaRegHeart } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = () => {
@@ -84,10 +85,19 @@ const Header = () => {
             <div className="flex items-center space-x-5 ">
               <NavLink
                 to={"/cart"}
-                className="hover:text-purple-300 flex relative"
+                className="hover:bg-yellow-500 flex relative p-5  rounded-full  hover:text-slate-200"
               >
                 <BsCart2 size={30} />{" "}
-                <span className="absolute -top-4 left-5 text-red-400 font-semibold text-xl">
+                <span className="absolute -top-1 left-9 text-red-600 font-semibold text-xl">
+                  {cart.length}
+                </span>
+              </NavLink>
+                        <NavLink
+                to={"/wishlist"}
+                className="hover:bg-yellow-500 flex relative p-5  rounded-full  hover:text-slate-200"
+              >
+                <FaRegHeart size={30} />{" "}
+                <span className="absolute -top-1 left-9 text-red-600 font-semibold text-xl">
                   {cart.length}
                 </span>
               </NavLink>
