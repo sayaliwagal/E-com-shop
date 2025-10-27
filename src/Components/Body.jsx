@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import { filterValues } from "../Utils/helper";
 import useCallApi from "../Utils/useCallApi";
-// import useOnline from "../Utils/useOnline";
+import { IoSearchSharp } from "react-icons/io5";
 const Body = () => {
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
@@ -26,7 +26,7 @@ const Body = () => {
   const ref = useRef("");
  const  handleRef = () => {
     ref.current.focus();
-    ref.current.style.backgroundColor ="gray"
+    // ref.current.style.backgroundColor ="gray"
   }
   useEffect(() => {
      handleRef();
@@ -35,19 +35,25 @@ const Body = () => {
   return (
     <>
       <h3 className="h3">Products List</h3>
+      <div className="flex rounded-full border-2 border-gray-500 overflow-hidden max-w-md mx-auto">
       <input
         type="search"
+        placeholder="Search Here...."
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
         ref={ref}
+        className="w-full outline-none bg-gray-400 text-xl font-bold text-white px-5 py-3"
       />
       <button
         onClick={() => {
           setFilterProducts(filterValues(products, searchText));
         }}
+        className="flex items-center rounded-r-full justify-center bg-gray-600 hover:bg-gray-700 px-6 text-slate-50"
       >
-        Search
+       <IoSearchSharp size={30} />
       </button>
+      </div>
+
       <div className="main-card">
         {loading? (
           <>
