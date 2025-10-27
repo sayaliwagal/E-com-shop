@@ -35,20 +35,20 @@ const Body = () => {
   return (
     <>
       <h3 className="h3">Products List</h3>
-      <div className="flex rounded-full border-2 border-gray-500 overflow-hidden max-w-md mx-auto">
+      <div className="flex rounded-full border-2 border-blue-500 overflow-hidden max-w-md mx-auto">
       <input
         type="search"
         placeholder="Search Here...."
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
         ref={ref}
-        className="w-full outline-none bg-gray-400 text-xl font-bold text-white px-5 py-3"
+        className="w-full outline-none bg-slate-100 text-xl font-bold text-gray-950 px-5 py-3"
       />
       <button
         onClick={() => {
           setFilterProducts(filterValues(products, searchText));
         }}
-        className="flex items-center rounded-r-full justify-center bg-gray-600 hover:bg-gray-700 px-6 text-slate-50"
+        className="flex items-center rounded-r-full justify-center bg-blue-600 hover:bg-blue-700 px-6 text-slate-50"
       >
        <IoSearchSharp size={30} />
       </button>
