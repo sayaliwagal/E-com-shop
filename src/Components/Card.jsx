@@ -1,13 +1,14 @@
 import { useContext } from "react";
 import { Link } from "react-router";
 import CartContext from "../Utils/Context/CartContext";
+import { FaRegHeart } from "react-icons/fa6";
 
 
 export const Card = (props) => {
   // console.log(props);
   const {products} = props;
   const {thumbnail, title, category, price, rating, id} = products;
-  const {addCart} = useContext(CartContext);
+  const {addCart, addWishList} = useContext(CartContext);
       return(
         <>
           <div className="card">
@@ -22,6 +23,8 @@ export const Card = (props) => {
           </Link>
           <p>{props.children}</p>
           <button onClick={() => addCart(products)}>Add To Cart</button>
+          <button onClick={() => addWishList(products)}> <FaRegHeart size={30}/></button>
+          
           </div>
         </>
       )

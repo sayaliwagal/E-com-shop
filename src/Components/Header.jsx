@@ -10,7 +10,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = () => {
   const [isLogedin, setIsLogedin] = useState(false);
-  const { cart } = useContext(CartContext);
+  const { cart, wishList } = useContext(CartContext);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const login = () => {
@@ -96,9 +96,9 @@ const Header = () => {
                 to={"/wishlist"}
                 className="hover:bg-yellow-500 flex relative p-5  rounded-full  hover:text-slate-200"
               >
-                <FaRegHeart size={30} />{" "}
+                <FaRegHeart size={30} />
                 <span className="absolute -top-1 left-9 text-red-600 font-semibold text-xl">
-                  {cart.length}
+                  {wishList.length}
                 </span>
               </NavLink>
               {!auth && (

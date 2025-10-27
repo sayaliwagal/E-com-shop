@@ -5,7 +5,10 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [wishList, setWishList] = useState([]);
   const [auth, setAuth] = useState(false);
+
+  // Cart Logic (already present).....
   const addCart = (product) => {
     console.log("data added");
     const exists = cart.find((item) => {
@@ -69,6 +72,28 @@ export const CartProvider = ({ children }) => {
        return tPrice;
     }
 
+    // WishList Logic
+    const addWishList = (product) => {
+      const exists = wishList.find((item) => item.id === product.id);
+      if(exists){
+        toast.error(`${product.title} is already in wishlist!`);
+        return;
+      }
+      setWishList([...wishList, product]);
+      toast.success(`${product.title} added to wishlist!`);
+    };
+
+    const removeWishList = (product) => {
+      setWishList(wishList.filter((item) => item.id !== product.id));
+      toast.success(`${product.title} removed form wishlist!`);
+    };
+
+    const moveToCart = (product) => {
+      removeWishList(product);
+      addCart(product);
+      toast.success(`${product.title} moved to cart !`)
+    }
+
     //login feature
     const login = () =>{
       setAuth(true);
@@ -82,7 +107,7 @@ export const CartProvider = ({ children }) => {
 
     
   return (
-    <CartContext.Provider value={{ cart, addCart, clearCart, removeProduct, increaseQty, decreaseQty, totalPrice, login, logout, auth}}>
+    <CartContext.Provider value={{ cart, addCart, clearCart, removeProduct, increaseQty, decreaseQty, totalPrice, login, logout, auth, wishList, addWishList, removeWishList, moveToCart}}>
       {children}
     </CartContext.Provider>
   );
