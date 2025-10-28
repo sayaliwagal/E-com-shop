@@ -4,25 +4,40 @@ import { useEffect, useRef, useState } from "react";
 import { ShimmerThumbnail } from "react-shimmer-effects";
 import { filterValues } from "../Utils/helper";
 import useCallApi from "../Utils/useCallApi";
-import { IoSearchSharp } from "react-icons/io5";
+import SearchBar from "./searchBar";
+
 const Body = () => {
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
+  // const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
 
   const data = useCallApi("https://dummyjson.com/products?limit=0");
 
   
-  //useeffect for api fetching
+// new Set(data.products.map((item) =>{
+//       return item.category;
+//     }))  //useeffect for api fetching
   useEffect(() => {
     setProducts(data.products);
     setFilterProducts(data.products);
     setLoading(false);
-    console.log(data.products);
+  //  const uniqueCategories = [
+  //   "All",
+  //   ...
+  //  ]
+  //  setCategories(uniqueCategories);
   }, [data]);
 
+  const applyFilters = () => {
+    let filtered = filterValues(products, searchText);
+    setFilterProducts(filtered);
+  }
+  useEffect(() =>{
+    applyFilters();
+  }, [searchText])
   const ref = useRef("");
  const  handleRef = () => {
     ref.current.focus();
@@ -35,24 +50,16 @@ const Body = () => {
   return (
     <>
       <h3 className="h3">Products List</h3>
-      <div className="flex rounded-full border-2 border-blue-500 overflow-hidden max-w-md mx-auto">
-      <input
-        type="search"
-        placeholder="Search Here...."
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        ref={ref}
-        className="w-full outline-none bg-slate-100 text-xl font-bold text-gray-950 px-5 py-3"
-      />
-      <button
-        onClick={() => {
-          setFilterProducts(filterValues(products, searchText));
-        }}
-        className="flex items-center rounded-r-full justify-center bg-blue-600 hover:bg-blue-700 px-6 text-slate-50"
-      >
-       <IoSearchSharp size={30} />
-      </button>
-      </div>
+        <SearchBar  searchText={searchText} setSearchText={setSearchText} onSearch={applyFilters} ref={ref}/>
+      
+              <div>
+           <select 
+           // value={selectedCategory}
+           onChange={(e) => setSelectedCategory(e.target.value)}
+           className="border-2 border-blue-400 px-4 py-2 rounded-lg font-semibold">
+             
+           </select>
+         </div>
 
       <div className="main-card">
         {loading? (
