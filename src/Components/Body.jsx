@@ -22,10 +22,7 @@ const Body = () => {
   useEffect(() => {
     if (!data || !data.products) return;
     setProducts(data.products);
-    console.log(
-      "Categories from API:",
-      data.products.map((p) => p.category)
-    );
+
     setFilterProducts(data.products);
     setLoading(false);
     if (Array.isArray(data?.products)) {
@@ -40,13 +37,6 @@ const Body = () => {
     let filtered = filterValues(products, searchText);
     filtered = filterByCategoryAndPrice(filtered, selectedCategory, priceRange);
     setFilterProducts(filtered);
-    console.log(filterProducts);
-    console.log({
-      total: products.length,
-      afterSearch: filtered.length,
-      selectedCategory,
-      searchText,
-    });
   };
   useEffect(() => {
     applyFilters();
@@ -59,7 +49,7 @@ const Body = () => {
   useEffect(() => {
     handleRef();
   }, []);
-  // console.log(ref);
+
   return (
     <div className="max-w-10xl mx-auto px-4 py-8">
       <h3 className="text-3xl font-semibold text-center text-gray-800 mb-8">
