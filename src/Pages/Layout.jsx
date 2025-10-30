@@ -16,6 +16,7 @@ import {  Routes, Route, Navigate } from 'react-router';
 import LoginPage from './LoginPage.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import WishList from './WishList.jsx';
+import Error from './Error.jsx';
 
 
 const Layout = () => {
@@ -41,7 +42,7 @@ const Layout = () => {
       {/* Dynamic route */}
       <Route path='/products/:title/:id' element ={<ProductDescp/>}></Route>
       <Route path='/login' element ={<LoginPage />}></Route>
-      <Route path='/*' element={<Navigate to={"/"}/>}/>
+      <Route path='/*' element={<Error />} />
      </Routes>
       <Footer /> 
     </>
