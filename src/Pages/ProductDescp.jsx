@@ -1,17 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router";
 import useCallApi from "../Utils/useCallApi";
 import Accordion from "../Components/Accordion";
-import { FaStar, FaTag } from "react-icons/fa";
+import { FaHeart, FaTag } from "react-icons/fa";
 import Error from "./Error.jsx";
 import StarRating from "../Components/StarRating.jsx";
+import CartContext from "../Utils/Context/CartContext.jsx";
 
 const ProductDescp = () => {
   const { title, id } = useParams();
-  console.log(id);
+  const {cart, addCart, removeProduc, wishList, addWishList, removeWishList } = useContext(CartContext);
+  const [liked, setLiked] = useState(false);
   const { data, loading, error, refetch } = useCallApi(
     `https://dummyjson.com/products/${id}`
   );
+
+  //Check if product is already in wishlist or not 
+  useEffect(() =>{
+    if(data){
+      const inWishList = wishList.some((item) => item.id === data.id);
+      setLiked(inWishList);
+    }
+  }, [wishList, data]);
+
+  // Handle wishlist toggle
+
+
+  //togle for like
+  const handleWishListClick = (product) => {
+    if(liked) {
+      removeWishList(product.id); //remove form wishlist
+    }else{
+         addWishList(product); //wishlist add logic.
+    }
+    setLiked((prev) => !prev); //toggle 
+ 
+  };
 
   //Loading ui (shimmer )
   if (loading) {
@@ -130,12 +154,24 @@ const ProductDescp = () => {
           </div>
           <p className="text-gray-700">{data?.description}</p>
           <div className="flex gap-4 mt-4">
-            <button className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-full font-semibold shadow">
+            <button 
+            onClick={() => addCart(data)}
+            className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-full font-semibold shadow">
               Add to Cart
             </button>
             <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold shadow">
               Buy Now
             </button>
+            <button 
+              onClick={() =>handleWishListClick(data)}
+            className={`p-4 rounded-full font-semibold shadow transition-all duration-300
+            ${liked ? "bg-red-100" : "bg-gray-200 hover:bg-gray-300"}`}>
+              <FaHeart 
+              size={30} 
+              className={`transition-all duration-300 ${liked ? "text-red-500 animate-pingOnce":"text-gray-400"}`}
+              />
+            </button>
+             
           </div>
         </div>
         </div>
