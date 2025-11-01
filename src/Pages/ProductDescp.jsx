@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useCallApi from "../Utils/useCallApi";
 import Accordion from "../Components/Accordion";
 import { FaHeart, FaTag } from "react-icons/fa";
@@ -9,12 +9,22 @@ import CartContext from "../Utils/Context/CartContext.jsx";
 
 const ProductDescp = () => {
   const { title, id } = useParams();
-  const {cart, addCart, removeProduc, wishList, addWishList, removeWishList } = useContext(CartContext);
+  const navigate = useNavigate();
+  const {cart, addCart, wishList, addWishList, removeWishList } = useContext(CartContext);
   const [liked, setLiked] = useState(false);
+  const [inCart, setInCart] = useState(false);
   const { data, loading, error, refetch } = useCallApi(
     `https://dummyjson.com/products/${id}`
   );
+  const [mainImage, setMainImage] = useState(data?.images?.[0] | "");
 
+
+  //image hover 
+  useEffect(() =>{
+    if(data?.images?.length > 0){
+      setMainImage(data.images[0]);
+    }
+  }, [data]);
   //Check if product is already in wishlist or not 
   useEffect(() =>{
     if(data){
@@ -29,12 +39,29 @@ const ProductDescp = () => {
   //togle for like
   const handleWishListClick = (product) => {
     if(liked) {
-      removeWishList(product.id); //remove form wishlist
+      removeWishList(product); //remove form wishlist
     }else{
          addWishList(product); //wishlist add logic.
     }
     setLiked((prev) => !prev); //toggle 
  
+  };
+
+   useEffect(() =>{
+    if(data){
+      const inCartList = cart.some((item) => item.id === data.id);
+      setInCart(inCartList);
+    }
+  }, [cart, data]);
+
+  //Hande Cart 
+  const handleCartClick = (product) => {
+    if(inCart) {
+      navigate('/cart'); //go to the cart page
+    }else {
+      addCart(product); //add to cart 
+      setInCart(true); //Update button state
+    }
   };
 
   //Loading ui (shimmer )
@@ -98,8 +125,11 @@ const ProductDescp = () => {
                 <img
                   src={imag}
                   alt="thumbnail"
+                  onMouseEnter={() => setMainImage(imag)} //change main image on hover 
                   key={i}
-                  className="w-70 h-40 object-cover rounded-lg cursor-pointer border-2 hover:border-blue-500"
+                  className={`w-70 h-40 object-contain border-2 rounded-md cursor-pointer transition-all duration-300 ${
+                mainImage === imag ? "border-blue-500" : "border-gray-200"
+              } hover:scale-105`}
                 />
               );
             })}
@@ -108,7 +138,7 @@ const ProductDescp = () => {
           {/* Main Image  */}
           <div className="flex-1 flex justify-center">
             <img
-              src={data?.images?.[0]}
+              src={mainImage}
               alt="productImge"
               className="h-[500px] object-contain rounded-xl shadow-md"
             />
@@ -155,9 +185,11 @@ const ProductDescp = () => {
           <p className="text-gray-700">{data?.description}</p>
           <div className="flex gap-4 mt-4">
             <button 
-            onClick={() => addCart(data)}
-            className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-full font-semibold shadow">
-              Add to Cart
+            onClick={() => handleCartClick(data)}
+            className={`${
+              inCart ? "bg-green-600 hover:bg-green-700 text-white" 
+              : "bg-yellow-400 hover:bg-yellow-500 text-black"} px-6 py-3 rounded-full font-semibold shadow transition-all duration-300`}>
+              {inCart ? "Go to Cart" : "Add to Cart"}
             </button>
             <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold shadow">
               Buy Now
