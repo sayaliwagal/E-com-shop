@@ -6,6 +6,7 @@ import { FaHeart, FaTag } from "react-icons/fa";
 import Error from "./Error.jsx";
 import StarRating from "../Components/StarRating.jsx";
 import CartContext from "../Utils/Context/CartContext.jsx";
+import ProductZoomImage from "../Components/ProductZoomImage.jsx";
 
 const ProductDescp = () => {
   const { title, id } = useParams();
@@ -136,12 +137,8 @@ const ProductDescp = () => {
           </div>
 
           {/* Main Image  */}
-          <div className="flex-1 flex justify-center">
-            <img
-              src={mainImage}
-              alt="productImge"
-              className="h-[500px] object-contain rounded-xl shadow-md"
-            />
+          <div className="flex-1 flex justify-center bg-white p-4 rounded-xl shadow-lg border border-gray-100">
+           <ProductZoomImage src={mainImage} alt={data?.title} />
           </div>
         {/* Product Info  */}
         <div className="flex-[1.5] flex flex-col justify-start gap-4">
