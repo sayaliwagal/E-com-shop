@@ -11,24 +11,25 @@ import ProductZoomImage from "../Components/ProductZoomImage.jsx";
 const ProductDescp = () => {
   const { title, id } = useParams();
   const navigate = useNavigate();
-  const {cart, addCart, wishList, addWishList, removeWishList } = useContext(CartContext);
+  const { cart, addCart, wishList, addWishList, removeWishList } =
+    useContext(CartContext);
   const [liked, setLiked] = useState(false);
   const [inCart, setInCart] = useState(false);
+  const [zoomVisible, setZoomVisible] = useState(false);
   const { data, loading, error, refetch } = useCallApi(
     `https://dummyjson.com/products/${id}`
   );
   const [mainImage, setMainImage] = useState(data?.images?.[0] | "");
 
-
-  //image hover 
-  useEffect(() =>{
-    if(data?.images?.length > 0){
+  //image hover
+  useEffect(() => {
+    if (data?.images?.length > 0) {
       setMainImage(data.images[0]);
     }
   }, [data]);
-  //Check if product is already in wishlist or not 
-  useEffect(() =>{
-    if(data){
+  //Check if product is already in wishlist or not
+  useEffect(() => {
+    if (data) {
       const inWishList = wishList.some((item) => item.id === data.id);
       setLiked(inWishList);
     }
@@ -36,31 +37,29 @@ const ProductDescp = () => {
 
   // Handle wishlist toggle
 
-
   //togle for like
   const handleWishListClick = (product) => {
-    if(liked) {
+    if (liked) {
       removeWishList(product); //remove form wishlist
-    }else{
-         addWishList(product); //wishlist add logic.
+    } else {
+      addWishList(product); //wishlist add logic.
     }
-    setLiked((prev) => !prev); //toggle 
- 
+    setLiked((prev) => !prev); //toggle
   };
 
-   useEffect(() =>{
-    if(data){
+  useEffect(() => {
+    if (data) {
       const inCartList = cart.some((item) => item.id === data.id);
       setInCart(inCartList);
     }
   }, [cart, data]);
 
-  //Hande Cart 
+  //Hande Cart
   const handleCartClick = (product) => {
-    if(inCart) {
-      navigate('/cart'); //go to the cart page
-    }else {
-      addCart(product); //add to cart 
+    if (inCart) {
+      navigate("/cart"); //go to the cart page
+    } else {
+      addCart(product); //add to cart
       setInCart(true); //Update button state
     }
   };
@@ -109,10 +108,8 @@ const ProductDescp = () => {
   }
 
   //Error State
-  if(error) {
-    return (
-      <Error />
-    )
+  if (error) {
+    return <Error />;
   }
   //Main Product UI.
   return (
@@ -126,88 +123,122 @@ const ProductDescp = () => {
                 <img
                   src={imag}
                   alt="thumbnail"
-                  onMouseEnter={() => setMainImage(imag)} //change main image on hover 
+                  onMouseEnter={() => setMainImage(imag)} //change main image on hover
                   key={i}
                   className={`w-70 h-40 object-contain border-2 rounded-md cursor-pointer transition-all duration-300 ${
-                mainImage === imag ? "border-blue-500" : "border-gray-200"
-              } hover:scale-105`}
+                    mainImage === imag ? "border-blue-500" : "border-gray-200"
+                  } hover:scale-105`}
                 />
               );
             })}
           </div>
 
           {/* Main Image  */}
-          <div className="flex-1 flex justify-center bg-white p-4 rounded-xl shadow-lg border border-gray-100">
-           <ProductZoomImage src={mainImage} alt={data?.title} />
-          </div>
-        {/* Product Info  */}
-        <div className="flex-[1.5] flex flex-col justify-start gap-4">
-          <h2 className="text-2xl font-semibold text-gray-900">
-            {data?.title}
-          </h2>
-          <p className="text-gray-600 font-medium"> {data?.brand}</p>
-          <div className="flex items-center gap-3">
-            <span className="text-3xl font-bold text-green-600">
-              ${data?.price}
-            </span>
-            <span className="line-through text-gray-400">
-              ${(data?.price * 1.8).toFixed(0)}
-            </span>
-            <span className="text-green-600 font-semibold">80% off</span>
-          </div>
-          <div className="flex items-center gap-2 font-semibold">
-            <span>
-              {data?.rating} <StarRating rating={data?.rating} /> ({Math.floor(Math.random() * 100)} reviews)
-            </span>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">
-              Available Offers
-            </h3>
-            <ul className="space-y-1 text-gray-700">
-              <li className="flex item-center gap-2">
-                <FaTag className="text-green-500" />
-                Get extra 15% off (price inclusive of discount)
-              </li>
-              <li className="flex items-center gap-2">
-                <FaTag className="text-green-500" />
-                10% cashback on orders above $999
-              </li>
-              <li className="flex items-center hap-2">
-                <FaTag className="text-green-500" />
-                Free delivery for Plus members
-              </li>
-            </ul>
-          </div>
-          <p className="text-gray-700">{data?.description}</p>
-          <div className="flex gap-4 mt-4">
-            <button 
-            onClick={() => handleCartClick(data)}
-            className={`${
-              inCart ? "bg-green-600 hover:bg-green-700 text-white" 
-              : "bg-yellow-400 hover:bg-yellow-500 text-black"} px-6 py-3 rounded-full font-semibold shadow transition-all duration-300`}>
-              {inCart ? "Go to Cart" : "Add to Cart"}
-            </button>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold shadow">
-              Buy Now
-            </button>
-            <button 
-              onClick={() =>handleWishListClick(data)}
-            className={`p-4 rounded-full font-semibold shadow transition-all duration-300
-            ${liked ? "bg-red-100" : "bg-gray-200 hover:bg-gray-300"}`}>
-              <FaHeart 
-              size={30} 
-              className={`transition-all duration-300 ${liked ? "text-red-500 animate-pingOnce":"text-gray-400"}`}
+
+            <div className="flex flex-col item-center justify-center">
+
+            <ProductZoomImage
+              src={mainImage}
+              alt={data?.title}
+              setZoomVisible={setZoomVisible}
               />
-            </button>
-             
-          </div>
+              </div>
+
+              {zoomVisible && (
+                <div 
+                className="w-full h-[600px] border overflow-hidden rounded-md shadow-lg bg-white hidden lg:block"
+                style={{
+                  backgroundImage: `url(${mainImage})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "100% 100%",
+                  backfacePosition: "center",
+                }}
+                ></div>
+              )}
+
+            {!zoomVisible && (
+              <div className="flex flex-col justify-center">
+                {/* Product Info  */}
+                <div className="flex-[1.5] flex flex-col justify-start gap-4">
+                  <h2 className="text-2xl font-semibold text-gray-900">
+                    {data?.title}
+                  </h2>
+                  <p className="text-gray-600 font-medium"> {data?.brand}</p>
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl font-bold text-green-600">
+                      ${data?.price}
+                    </span>
+                    <span className="line-through text-gray-400">
+                      ${(data?.price * 1.8).toFixed(0)}
+                    </span>
+                    <span className="text-green-600 font-semibold">
+                      80% off
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 font-semibold">
+                    <span>
+                      {data?.rating} <StarRating rating={data?.rating} /> (
+                      {Math.floor(Math.random() * 100)} reviews)
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                      Available Offers
+                    </h3>
+                    <ul className="space-y-1 text-gray-700">
+                      <li className="flex item-center gap-2">
+                        <FaTag className="text-green-500" />
+                        Get extra 15% off (price inclusive of discount)
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <FaTag className="text-green-500" />
+                        10% cashback on orders above $999
+                      </li>
+                      <li className="flex items-center hap-2">
+                        <FaTag className="text-green-500" />
+                        Free delivery for Plus members
+                      </li>
+                    </ul>
+                  </div>
+                  <p className="text-gray-700">{data?.description}</p>
+                  <div className="flex gap-4 mt-4">
+                    <button
+                      onClick={() => handleCartClick(data)}
+                      className={`${
+                        inCart
+                          ? "bg-green-600 hover:bg-green-700 text-white"
+                          : "bg-yellow-400 hover:bg-yellow-500 text-black"
+                      } px-6 py-3 rounded-full font-semibold shadow transition-all duration-300`}
+                    >
+                      {inCart ? "Go to Cart" : "Add to Cart"}
+                    </button>
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold shadow">
+                      Buy Now
+                    </button>
+                    <button
+                      onClick={() => handleWishListClick(data)}
+                      className={`p-4 rounded-full font-semibold shadow transition-all duration-300
+            ${liked ? "bg-red-100" : "bg-gray-200 hover:bg-gray-300"}`}
+                    >
+                      <FaHeart
+                        size={30}
+                        className={`transition-all duration-300 ${
+                          liked
+                            ? "text-red-500 animate-pingOnce"
+                            : "text-gray-400"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+ 
         </div>
-        </div>
+        {/* Accordion */}
+        <h1 className="text-5xl text-center my-5">FAQ</h1>
+        <Accordion />
       </div>
-      {/* Accordion */}
-      <h1 className="text-5xl text-center my-5">FAQ</h1>
-      <Accordion />
     </div>
   );
 };

@@ -1,34 +1,34 @@
-import { transform } from 'motion';
-import React, { useState } from 'react'
+// ✅ ProductZoomImage.jsx
+import React, { useRef, useState } from "react";
 
-const ProductZoomImage = ({ src, alt}) => {
-  const [ isZoomed, setIsZoomed ] = useState(false);
-  const [ backgroundPosition, setBackgroundPosition ] = useState("center");
+const ProductZoomImage = ({ src, alt, setZoomVisible }) => {
+  const [backgroundPos, setBackgroundPos] = useState("center");
   const imgRef = useRef(null);
 
   const handleMouseMove = (e) => {
-    const { left, top, width, height } = e.target.getBoundingClientRect();
-    const x = ((e.pageX - left - window.scrollX) / width) * 100;
-    const y = ((e.pageY - top - window.scrollY) / height) * 100;
-    setBackgroundPosition({ transformOrigin: `${x}%${y}%`});
+    if (!imgRef.current) return;
+
+    const { left, top, width, height } = imgRef.current.getBoundingClientRect();
+    const x = ((e.pageX - left) / width) * 100;
+    const y = ((e.pageY - top) / height) * 100;
+    setBackgroundPos(`${x}% ${y}%`);
   };
 
   return (
-    <div 
-    className="relative w-[500px] h-[500px] overflow-hidden border rounded-xl shadow-md"
-    onMouseEnter={() => setIsZoomed(true)}
-    onMouseLeave={() => setIsZoomed(false)}
-    onMouseMove={handleMouseMove}
+    <div
+      ref={imgRef}
+      className="relative w-[400px] h-[400px] border rounded-md overflow-hidden cursor-crosshair"
+      onMouseEnter={() => setZoomVisible(true)}
+      onMouseLeave={() => setZoomVisible(false)}
+      onMouseMove={handleMouseMove}
     >
-        <img 
+      <img
         src={src}
         alt={alt}
-        className={`w-full h-full object-contain transition-transform duration-300
-            ${isZoomed? "scale-125" : "scale-100"
-            }`}
+        className="w-full h-full object-contain select-none"
       />
     </div>
   );
-}
+};
 
-export default ProductZoomImage
+export default ProductZoomImage;
