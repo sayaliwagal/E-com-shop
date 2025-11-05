@@ -34,21 +34,23 @@ const Header = () => {
             <img src={logo} alt="logo" className="h-20 w-auto" />
             {/* Desktop NavLink */}
             <ul className="hidden md:flex font-semibold text-xl gap-10">
-             {["/", "/about", "/contact", "/blog"].map((path,i) =>(
-              <li key={i}>
-                <NavLink
-                to={path}
-                className={({ isActive }) =>
-                isActive 
-              ? "text-yellow-400 border-b-2 border-yellow-400 pb-1"
-              : "hover:text-purple-300"}
-              >
-                {path === "/"
-                ? "Home"
-              : path.replace("/", "").charAt(0).toUpperCase() + path.slice(2)}
-              </NavLink>
-              </li>
-             ))}
+              {["/", "/about", "/contact", "/blog"].map((path, i) => (
+                <li key={i}>
+                  <NavLink
+                    to={path}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-yellow-400 border-b-2 border-yellow-400 pb-1"
+                        : "hover:text-purple-300"
+                    }
+                  >
+                    {path === "/"
+                      ? "Home"
+                      : path.replace("/", "").charAt(0).toUpperCase() +
+                        path.slice(2)}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
 
             {/* Right Icons and Buttons */}
@@ -62,7 +64,7 @@ const Header = () => {
                   {cart.length}
                 </span>
               </NavLink>
-                        <NavLink
+              <NavLink
                 to={"/wishlist"}
                 className="hover:bg-yellow-500 flex relative p-5  rounded-full  hover:text-slate-200"
               >
@@ -72,7 +74,7 @@ const Header = () => {
                 </span>
               </NavLink>
               {!auth && (
-                <div className="hidden md:block hover:text-purple-300 hover:bg-yellow-500 border-yellow-500 text-xl bg-yellow-600 p-2 rounded-md font-semibold">
+                <div className="hidden md:block hover:text-purple-300 hover:bg-yellow-600 border-yellow-500 text-xl bg-yellow-500 p-2 rounded-md font-semibold">
                   <NavLink to={"/login"}>Login</NavLink>
                 </div>
               )}
@@ -92,7 +94,13 @@ const Header = () => {
           </button>
         </nav>
       </header>
-      <ResponsiveMenu className="xl:hidden" open={open} setOpen={setOpen} auth={auth} logout={logout} />
+      <ResponsiveMenu
+        className="xl:hidden"
+        open={open}
+        setOpen={setOpen}
+        auth={auth}
+        logout={logout}
+      />
     </div>
   );
 };

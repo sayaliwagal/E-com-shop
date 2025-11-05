@@ -38,7 +38,7 @@ const ResponsiveMenu = ({ open, setOpen, auth, logout }) => {
               <NavLink
               to="/login"
               onClick={closeMenu}
-              className="bg-yellow-500 text-black px-6 py-2 rounded-md font-semibold hover:bg-red-400"
+              className="bg-yellow-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-red-400"
               >
                 Login
               </NavLink>
