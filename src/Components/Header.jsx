@@ -7,10 +7,11 @@ import ResponsiveMenu from "./ResponsiveMenu.jsx";
 import { BsCart2 } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { li } from "motion/react-client";
 
 const Header = () => {
   const [isLogedin, setIsLogedin] = useState(false);
-  const { cart, wishList } = useContext(CartContext);
+  const { cart, wishList, auth, logout } = useContext(CartContext);
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const login = () => {
@@ -24,71 +25,40 @@ const Header = () => {
       navigate("/");
     }
   };
-  const { auth, logout } = useContext(CartContext);
   const isOnline = useOnline();
   return (
     <div className="flex">
-      <div className="relative mx-auto overflow-x-hidden">
-        <nav className="flex justify-between bg-gray-800 text-white w-screen">
-          <div className="px-5 xl:px-12  flex w-full items-center justify-between">
-            <img src={logo} alt="logo" style={{ height: "100px" }} />
-            <ul className="hidden md:flex px-6 mx-auto font-semibold text-xl space-x-12">
-              <li className="cursor-pointer">
+      <header className="bg-gray-800 text-white w-full shadow-md sticky top-0 z-40">
+        <nav className="flex justify-between item-center px-5 py-4 md:px-12">
+          <div className="flex w-full items-center justify-between gap-3">
+            <img src={logo} alt="logo" className="h-20 w-auto" />
+            {/* Desktop NavLink */}
+            <ul className="hidden md:flex font-semibold text-xl gap-10">
+             {["/", "/about", "/contact", "/blog"].map((path,i) =>(
+              <li key={i}>
                 <NavLink
-                  to={"/"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-yellow-600 font-bold border-b-3 border-yellow-600"
-                      : "text-slate-100-600 hover:text-purple-300"
-                  }
-                >
-                  Home
-                </NavLink>
+                to={path}
+                className={({ isActive }) =>
+                isActive 
+              ? "text-yellow-400 border-b-2 border-yellow-400 pb-1"
+              : "hover:text-purple-300"}
+              >
+                {path === "/"
+                ? "Home"
+              : path.replace("/", "").charAt(0).toUpperCase() + path.slice(2)}
+              </NavLink>
               </li>
-              <li className="cursor-pointer">
-                <NavLink
-                  to={"/about"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-yellow-600 font-bold border-b-3 border-yellow-600"
-                      : "text-slate-100-600 hover:text-purple-300"
-                  }
-                >
-                  About
-                </NavLink>
-              </li>
-              <li className="cursor-pointer">
-                <NavLink
-                  to={"/contact"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-yellow-600 font-bold border-b-3 border-yellow-600"
-                      : "text-slate-100-600 hover:text-purple-300"
-                  }
-                >
-                  Contact
-                </NavLink>
-              </li>
-              <li className="cursor-pointer">
-                <NavLink
-                  to={"/blog"}
-                  className={({ isActive }) =>
-                    isActive
-                      ? "text-yellow-600 font-bold border-b-3 border-yellow-600"
-                      : "text-slate-100-600 hover:text-purple-300"
-                  }
-                >
-                  Blog
-                </NavLink>
-              </li>
+             ))}
             </ul>
-            <div className="flex items-center space-x-5 ">
+
+            {/* Right Icons and Buttons */}
+            <div className="flex items-center gap-3">
               <NavLink
                 to={"/cart"}
                 className="hover:bg-yellow-500 flex relative p-5  rounded-full  hover:text-slate-200"
               >
-                <BsCart2 size={30} />{" "}
-                <span className="absolute -top-1 left-9 text-red-600 font-semibold text-xl">
+                <BsCart2 size={30} />
+                <span className="absolute top-1 right-3 bg-red-500 text-white text-xs rounded-full px-2">
                   {cart.length}
                 </span>
               </NavLink>
@@ -97,17 +67,17 @@ const Header = () => {
                 className="hover:bg-yellow-500 flex relative p-5  rounded-full  hover:text-slate-200"
               >
                 <FaRegHeart size={30} />
-                <span className="absolute -top-1 left-9 text-red-600 font-semibold text-xl">
+                <span className="absolute top-1 right-3 bg-red-500 text-white text-xs rounded-full px-2">
                   {wishList.length}
                 </span>
               </NavLink>
               {!auth && (
-                <div className="hover:text-purple-300 hover:bg-amber-500 border-amber-500 text-xl bg-yellow-600 p-2 rounded-md font-semibold">
+                <div className="hidden md:block hover:text-purple-300 hover:bg-yellow-500 border-yellow-500 text-xl bg-yellow-600 p-2 rounded-md font-semibold">
                   <NavLink to={"/login"}>Login</NavLink>
                 </div>
               )}
               {auth && (
-                <div className="hover:text-gray-200 hover:bg-red-600 border-red-500 text-xl bg-red-500 p-2 rounded-md font-semibold">
+                <div className="hidden md:block hover:text-gray-200 hover:bg-red-600 border-red-500 text-xl bg-red-500 p-2 rounded-md font-semibold">
                   <button onClick={logout}>Logout</button>
                 </div>
               )}
@@ -121,8 +91,8 @@ const Header = () => {
             <GiHamburgerMenu className="h-8 w-8 hover:text-gray-200" />
           </button>
         </nav>
-      </div>
-      <ResponsiveMenu className="xl:hidden" open={open} setOpen={setOpen} />
+      </header>
+      <ResponsiveMenu className="xl:hidden" open={open} setOpen={setOpen} auth={auth} logout={logout} />
     </div>
   );
 };

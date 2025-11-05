@@ -1,12 +1,28 @@
-import { children, createContext, useState } from "react";
+import { children, createContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  const [wishList, setWishList] = useState([]);
+  //Load from localStorage
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  const [wishList, setWishList] = useState(() => {
+    const savedWishList = localStorage.getItem("wishList");
+    return savedWishList ? JSON.parse(savedWishList) : [];
+  });
   const [auth, setAuth] = useState(false);
+
+//Sync with localStorage whenever data changes
+useEffect(() => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}, [cart]);
+
+useEffect(() => {
+  localStorage.setItem("wishList", JSON.stringify(wishList));
+}, [wishList]);
 
   // Cart Logic (already present).....
   const addCart = (product) => {
