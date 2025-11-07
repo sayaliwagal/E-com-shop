@@ -7,7 +7,7 @@ import ResponsiveMenu from "./ResponsiveMenu.jsx";
 import { BsCart2 } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { li } from "motion/react-client";
+import ThemeToggle from "./ThemeToggle.jsx";
 
 const Header = () => {
   const [isLogedin, setIsLogedin] = useState(false);
@@ -73,6 +73,9 @@ const Header = () => {
                   {wishList.length}
                 </span>
               </NavLink>
+              <div className="mx-5">
+              <ThemeToggle  />
+              </div>
               {!auth && (
                 <div className="hidden md:block hover:text-purple-300 hover:bg-yellow-600 border-yellow-500 text-xl bg-yellow-500 p-2 rounded-md font-semibold">
                   <NavLink to={"/login"}>Login</NavLink>

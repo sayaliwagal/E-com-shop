@@ -14,9 +14,9 @@ function App() {
     );
   }
  return(
-  <>
+  <div className="bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-50">
     <Body/>
- </>
+ </div>
   ) 
 }  
 export default App

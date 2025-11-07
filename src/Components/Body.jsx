@@ -61,7 +61,7 @@ const Body = () => {
   if (loading) {
     return (
       <div className="max-w-10xl mx-auto px-4 py-8">
-        <h3 className="text-3xl font-semibold text-center text-gray-800 mb-8">
+        <h3 className="text-3xl font-semibold text-center text-gray-800 dark:text-white mb-8">
           Loading Products.....
         </h3>
         <div className="flex flex-wrap justify-center gap-8 px-4 md:px-6 mt-4">
@@ -98,10 +98,10 @@ const Body = () => {
   //Main Render
   return (
     <div className="max-w-10xl mx-auto px-4 py-8">
-      <h3 className="text-3xl font-semibold text-center text-gray-800 mb-8">
+      <h3 className="text-3xl font-semibold text-center text-gray-800  dark:text-white mb-8">
         Products List
       </h3>
-      <div className="w-full bg-white rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-8 mb-6">
+      <div className="w-full rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-8 mb-6">
         {/* Search Section  */}
         <div className="flex-1">
           <SearchBar
