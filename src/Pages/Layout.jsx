@@ -3,6 +3,7 @@ import App from '../App.jsx';
 import About from './About.jsx';
 import Contact from './Contact.jsx'
 import Cart from './Cart.jsx'
+import Checkout from './Checkout.jsx'
 // import Blog from '/Blog.jsx'
 const Blog = lazy(() =>(import("./Blog.jsx")))
 // import Error from '/Error.jsx'
@@ -33,6 +34,7 @@ const Layout = () => {
       <Route path="/contact" element = {<Contact />}/>
       <Route path="/cart" element = {<ProtectedRoute><Cart/></ProtectedRoute>}/>
       <Route path="/wishlist" element = {<ProtectedRoute><WishList /></ProtectedRoute>}/>
+      <Route path="/checkout" element ={<ProtectedRoute><Checkout /></ProtectedRoute>}></Route>
       <Route path='/blog' element= {<Suspense fallback={<h2> Loadding....</h2>}><Blog/></Suspense>}>
       {/* Nested Routes */}
       <Route path='' index element= {<Women />}/>

@@ -17,7 +17,7 @@ const ProductZoomImage = ({ src, alt, setZoomVisible }) => {
   return (
     <div
       ref={imgRef}
-      className="relative w-[400px] h-[400px] border rounded-md overflow-hidden cursor-crosshair"
+      className="relative w-[500px] h-[500px]  rounded-md overflow-hidden cursor-crosshair"
       onMouseEnter={() => setZoomVisible(true)}
       onMouseLeave={() => setZoomVisible(false)}
       onMouseMove={handleMouseMove}

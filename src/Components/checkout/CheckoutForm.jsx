@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 
 const CheckoutForm = () => {
     const navigate = useNavigate();
-    cont [ formData, setFormData ] = useState({
+    const [ formData, setFormData ] = useState({
         fullName: "",
         email: "",
         phone: "",

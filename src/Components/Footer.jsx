@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router";
+import { titles } from "../constant";
 
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-white pt-12 pb-6">
+    <footer className="bg-gray-900 text-white pt-12 pb-6 ">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
@@ -18,13 +19,14 @@ function Footer() {
           <div>
             <h4 className="text-md font-medium mb-4 text-white">Quick Links</h4>
             <ul className="space-y-2">
-              {['Home', 'About', 'Products', 'Blog'].map((item) => (
-                <li key={item}>
+              {Object.entries(titles).filter(([path]) => 
+              !path.includes(":") && path !== "/*").map(([path, label]) => (
+                 <li key={path}>
                   <Link 
-                    to={`/${item.toLowerCase()}`} 
+                    to={path} 
                     className="text-gray-400 hover:text-indigo-300 text-sm transition-colors duration-200"
                   >
-                    {item}
+                    {label}
                   </Link>
                 </li>
               ))}

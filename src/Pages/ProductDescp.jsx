@@ -70,7 +70,7 @@ const ProductDescp = () => {
       <div className="min-h-screen bg-gray-50 p-2 animate-pulse">
         <div className="w-full flex flex-col md:flex-row gap-8 bg-white p-8 rounded-2xl">
           {/* Left Tumbnails  */}
-          <div className="flex flex-col gap- min-w-[200px]">
+          <div className="flex flex-col gap- min-w-[300px]">
             {Array.from({ length: 4 }).map((_, i) => {
               return (
                 <div
@@ -115,7 +115,7 @@ const ProductDescp = () => {
   return (
     <div>
       <div className="min-h-screen bg-gray-50 p-8">
-        <div className="max-w-full mx-20 flex flex-col md:flex-row gap-8 bg-white p-6 rounded-2xl shadow-lg">
+        <div className="max-w-full mx-5 flex flex-col md:flex-row gap-8 bg-white p-6 rounded-2xl shadow-lg">
           {/* Left Thumbnails  */}
           <div className="flex flex-col gap-4">
             {data?.images?.map((imag, i) => {
@@ -125,7 +125,7 @@ const ProductDescp = () => {
                   alt="thumbnail"
                   onMouseEnter={() => setMainImage(imag)} //change main image on hover
                   key={i}
-                  className={`w-70 h-40 object-contain border-2 rounded-md cursor-pointer transition-all duration-300 ${
+                  className={`w-90 h-40 object-contain border-2 rounded-md cursor-pointer transition-all duration-300 ${
                     mainImage === imag ? "border-blue-500" : "border-gray-200"
                   } hover:scale-105`}
                 />

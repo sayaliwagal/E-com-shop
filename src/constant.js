@@ -37,6 +37,7 @@ export const titles = {
   "/blog/kidsfashion" : "Kids Fashion Blog",
   "/products/:title/:id" : "Products Details",
   "/cart" : "Cart",
+  "/checkout" : "Checkout",
   '/login' : "Login Page",
   '/*'     : "Error Page",
 };

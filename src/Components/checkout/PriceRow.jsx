@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SummaryCard = () => {
+const PriceRow = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const SummaryCard = () => {
   )
 }
 
-export default SummaryCard
+export default PriceRow
