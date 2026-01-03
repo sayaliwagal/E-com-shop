@@ -1,9 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router';
 import CartContext from '../Utils/Context/CartContext'
 import PriceRow from '../Components/checkout/PriceRow'
+import toast from "react-hot-toast";
 
 const OrderSummary = () => {
-  const { cart, totalPrice } = useContext(CartContext);
+  const { cart, totalPrice, clearCart } = useContext(CartContext);
+    const navigate = useNavigate();
 
   const subTotal = totalPrice();
   const delivery = subTotal > 500 ? 0 : 50;
@@ -16,6 +19,22 @@ const OrderSummary = () => {
       </p>
     );
   }
+  
+  const handlePlaceOrder = () => {
+    if(cart.length === 0) {
+      toast.error("Cart is empty");
+      return;
+    }
+    const addressData = JSON.parse(localStorage.getItem("checkoutAddress"));
+
+    if(!addressData){
+      toast.error("Shipping address missing");
+      return;
+    }
+    localStorage.setItem("shippingAddress", JSON.stringify(addressData));
+    clearCart();
+    navigate("/order-success");
+  };
   return (
     <div className="dark:text-slate-50">
       <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
@@ -35,7 +54,9 @@ const OrderSummary = () => {
         <PriceRow label="Total" value={total} bold />
 
            
-        <button disabled={cart.length=== 0} className='w-full mt-6 bg-green-600 hover:bg-green-700 disabled:backdrop-opacity-30 text-white py-3 rounded-lg font-semibold'>
+        <button 
+        onClick={handlePlaceOrder}
+        disabled={cart.length=== 0} className='w-full mt-6 bg-green-600 hover:bg-green-700 disabled:backdrop-opacity-30 text-white py-3 rounded-lg font-semibold'>
           Place Order
         </button>
 
