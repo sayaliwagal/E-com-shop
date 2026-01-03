@@ -8,6 +8,14 @@ const OrderSummary = () => {
   const subTotal = totalPrice();
   const delivery = subTotal > 500 ? 0 : 50;
   const total = subTotal + delivery;
+
+  if(cart.length === 0) {
+    return (
+      <p className="text-center text-slate-400">
+        Your Cart is Empty.
+      </p>
+    );
+  }
   return (
     <div className="dark:text-slate-50">
       <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
@@ -27,7 +35,7 @@ const OrderSummary = () => {
         <PriceRow label="Total" value={total} bold />
 
            
-        <button disabled={cart.length=== 0} className='w-full mt-6 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white py-3 rounded-lg font-semibold'>
+        <button disabled={cart.length=== 0} className='w-full mt-6 bg-green-600 hover:bg-green-700 disabled:backdrop-opacity-30 text-white py-3 rounded-lg font-semibold'>
           Place Order
         </button>
 

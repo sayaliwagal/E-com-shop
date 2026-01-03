@@ -35,6 +35,7 @@ const Body = () => {
       setCategories(uniqueCategories);
     }
   }, [data]);
+  
   //Filter Logic
   const applyFilters = () => {
     let filtered = filterValues(products, searchText);
