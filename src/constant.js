@@ -38,6 +38,7 @@ export const titles = {
   "/products/:title/:id" : "Products Details",
   "/cart" : "Cart",
   "/checkout" : "Checkout",
+  "order-success" : "OrderSuccess",
   '/login' : "Login Page",
   '/*'     : "Error Page",
 };

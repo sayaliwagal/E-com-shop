@@ -18,6 +18,7 @@ import LoginPage from './LoginPage.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import WishList from './WishList.jsx';
 import Error from './Error.jsx';
+import OrderSuccess from './OrderSuccess.jsx';
 
 
 const Layout = () => {
@@ -43,6 +44,7 @@ const Layout = () => {
       </Route>
       {/* Dynamic route */}
       <Route path='/products/:title/:id' element ={<ProductDescp/>}></Route>
+      <Route path='/order-success' element ={<OrderSuccess/>}></Route>
       <Route path='/login' element ={<LoginPage />}></Route>
       <Route path='/*' element={<Error />} />
      </Routes>
