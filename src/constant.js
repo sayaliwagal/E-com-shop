@@ -42,3 +42,22 @@ export const titles = {
   '/login' : "Login Page",
   '/*'     : "Error Page",
 };
+
+
+export const banners = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
+    title: "Mega Sale",
+    subtitle: "Up to 70% off",
+    cta: "Shop Now",
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1491553895911-0055eca6402d",
+    title: "New Arrivals",
+    subtitle: "Fresh collections",
+    cta: "Explore",
+  },
+];
+

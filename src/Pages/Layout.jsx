@@ -19,6 +19,7 @@ import ProtectedRoute from './ProtectedRoute.jsx';
 import WishList from './WishList.jsx';
 import Error from './Error.jsx';
 import OrderSuccess from './OrderSuccess.jsx';
+import Hero from '../Components/Hero.jsx';
 
 
 const Layout = () => {
@@ -28,6 +29,7 @@ const Layout = () => {
   return (
     <>
      <Header searchText={searchText} setSearchText={setSearchText}/>
+     <Hero />
      <Routes>
       {/* Static route */}
       <Route path="/" element = {<App searchText={searchText} />}/>
