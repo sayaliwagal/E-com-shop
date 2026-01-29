@@ -36,3 +36,9 @@ body,
     focus:ring-2 focus:ring-indigo-500 outline-none
     dark:bg-gray-700 dark:text-white dark:border-gray-600;
 }
+
+.slick-dots li.slick-active div {
+    background-color: rgb(245, 4, 4);
+    width: 20px;
+    border-radius: 9999px;
+}
