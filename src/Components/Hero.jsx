@@ -34,7 +34,8 @@ const Hero = () => {
      <section className="relative">
        <Slider {...setting}>
          {banners.map((banner) => (  
-          <HeroSlide key={banner.id} {...banner} onCtaClick={() =>{ navigate("/products")}} />
+          <HeroSlide key={banner.id} {...banner} 
+          onCtaClick={() =>{ navigate(`/category/${banner.category}`)}} />
          ))}
        </Slider>
      </section>

@@ -33,6 +33,7 @@ const Layout = () => {
      <Routes>
       {/* Static route */}
       <Route path="/" element = {<App searchText={searchText} />}/>
+      <Route path="/category/:category" element={<App searchText={searchText} />} />
       <Route path="/about" element = {<About />}/>
       <Route path="/contact" element = {<Contact />}/>
       <Route path="/cart" element = {<ProtectedRoute><Cart/></ProtectedRoute>}/>

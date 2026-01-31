@@ -7,7 +7,7 @@ import useCallApi from "../Utils/useCallApi";
 import Error from "../Pages/Error";
 import SearchBar from "./searchBar";
 import Filters from "./Filters";
-
+import { useParams } from "react-router";
 
 const Body = () => {
   const [products, setProducts] = useState([]);
@@ -16,10 +16,11 @@ const Body = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [priceRange, setPriceRange] = useState([0, 2000]);
+  const { category } = useParams();
   // const [loading, setLoading] = useState(true);
 
   const { data, loading, error, refetch } = useCallApi(
-    "https://dummyjson.com/products?limit=0"
+    "https://dummyjson.com/products?limit=0",
   );
 
   useEffect(() => {
@@ -30,16 +31,25 @@ const Body = () => {
 
     if (Array.isArray(data?.products)) {
       const uniqueCategories = Array.from(
-        new Set(data?.products?.map((p) => p.category))
+        new Set(data?.products?.map((p) => p.category)),
       );
       setCategories(uniqueCategories);
     }
-  }, [data]);
-  
+
+    if (category) {
+      setSelectedCategory(category);
+    } else {
+      setSelectedCategory("All");
+    }
+  }, [data, category]);
+
   //Filter Logic
   const applyFilters = () => {
     let filtered = filterValues(products, searchText);
-    filtered = filterByCategoryAndPrice(filtered, selectedCategory, priceRange);
+    filtered = filterByCategoryAndPrice(
+      filtered, 
+      selectedCategory === "All" ? null : selectedCategory, 
+      priceRange);
     setFilterProducts(filtered);
   };
 
@@ -50,8 +60,8 @@ const Body = () => {
   const ref = useRef(null);
 
   const handleRef = () => {
-    if(ref.current && typeof ref.current.focus === "function")
-    ref.current.focus();
+    if (ref.current && typeof ref.current.focus === "function")
+      ref.current.focus();
     // ref.current.style.backgroundColor ="gray"
   };
 
@@ -92,7 +102,7 @@ const Body = () => {
   if (error) {
     return (
       <div className="text-center mt-2">
-      <Error />
+        <Error />
       </div>
     );
   }

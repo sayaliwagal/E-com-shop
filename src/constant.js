@@ -41,6 +41,7 @@ export const titles = {
   "/order-success" : "OrderSuccess",
   '/login' : "Login Page",
   '/*'     : "Error Page",
+  "/category/:category" : "Product List "
 };
 
 

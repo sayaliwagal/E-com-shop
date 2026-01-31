@@ -1,9 +1,10 @@
 import React from "react";
 import { useSpring, animated } from "@react-spring/web";
-import { useNavigate } from "react-router";
+
 import { scale, transform } from "motion";
 
 const HeroSlide = ({ title, tag, image, subtitle,cta, onCtaClick }) => {
+
     const textAnimation= useSpring({
       from: { opacity: 0, transform: "translateY(40px)"},
       to: { opacity: 1, transform: "translateY(0px)"},
@@ -12,14 +13,11 @@ const HeroSlide = ({ title, tag, image, subtitle,cta, onCtaClick }) => {
     });
     
      const buttonAnimation = useSpring({
-      form: { opacity: 0, transform: "scale(0.8)"},
+      from: { opacity: 0, transform: "scale(0.8)"},
       to: { opacity: 1, transform: "scale(1)"},
       delay: 500,
      });
 
-     const handleClick = () => {
-      Navigate(`/?category=${banners.category}`);
-     }
   return (
      <section className="w-full h-[450px] md:h-[600px]">
         <div className="h-full w-full bg-cover bg-center"
