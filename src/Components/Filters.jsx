@@ -1,8 +1,25 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 
-const Filters = ({ categories, selectedCategory, setSelectedCategory, priceRange, setPriceRange 
-
+const Filters = ({ 
+  categories, 
+  selectedCategory, 
+  setSelectedCategory, 
+  priceRange, 
+  setPriceRange 
 }) => {
+
+  const navigate = useNavigate();
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category)
+
+    if(category === "All") {
+      navigate("/");
+    }else{
+      navigate(`/category/${category}`);
+    }
+  }
   return (
     <div className="flex flex-col md:flex-row items-center gap-4">
   {/* Category Dropdown */}

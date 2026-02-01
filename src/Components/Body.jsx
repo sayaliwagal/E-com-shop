@@ -7,16 +7,20 @@ import useCallApi from "../Utils/useCallApi";
 import Error from "../Pages/Error";
 import SearchBar from "./searchBar";
 import Filters from "./Filters";
+import Hero from "./Hero.jsx"
 import { useParams } from "react-router";
 
 const Body = () => {
+
+ const { category } = useParams();
+  const isHero = !category
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [priceRange, setPriceRange] = useState([0, 2000]);
-  const { category } = useParams();
+ 
   // const [loading, setLoading] = useState(true);
 
   const { data, loading, error, refetch } = useCallApi(
@@ -108,9 +112,11 @@ const Body = () => {
   }
   //Main Render
   return (
+    <>
+      {isHero && <Hero />}
     <div className="max-w-10xl mx-auto px-4 py-8">
       <h3 className="text-3xl font-semibold text-center text-gray-800  dark:text-white mb-8">
-        Products List
+        {category ? `${category} Products`: "All Products"}
       </h3>
       <div className="w-full rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-8 mb-6">
         {/* Search Section  */}
@@ -149,6 +155,7 @@ const Body = () => {
         )}
       </div>
     </div>
+    </>
     // </div>
   );
 };
