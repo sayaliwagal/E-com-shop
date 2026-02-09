@@ -15,7 +15,9 @@ const CategorySection = ({ title, category, products}) => {
       </div>
       {/* Products  */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card key={products.id} products={products} />
+        {products?.slice(0,4).map(item => (
+          <Card key={item.id} products={item} />
+        ))}
       </div>
     </section>
   )

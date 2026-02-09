@@ -1,51 +1,37 @@
-import { Link } from "react-router";
-import { Card } from "./Card";
+import { Card } from "./Card.jsx";
 import { useEffect, useRef, useState } from "react";
 import { ShimmerThumbnail } from "react-shimmer-effects";
-import { filterValues, filterByCategoryAndPrice } from "../Utils/helper";
-import useCallApi from "../Utils/useCallApi";
-import Error from "../Pages/Error";
-import SearchBar from "./searchBar";
-import Filters from "./Filters";
-import Hero from "./Hero.jsx"
+import { filterValues, filterByCategoryAndPrice } from "../Utils/helper.js";
+import Error from "../Pages/Error.jsx";
+import SearchBar from "./searchBar.jsx";
+import Filters from "./Filters.jsx";
 import { useParams } from "react-router";
+import { useProducts } from "../Utils/Context/ProductContext.jsx";
 
-const Body = () => {
+const ProductListing = () => {
 
  const { category } = useParams();
-  const isHero = !category
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [categories, setCategories] = useState([]);
+ 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [priceRange, setPriceRange] = useState([0, 2000]);
  
   // const [loading, setLoading] = useState(true);
 
-  const { data, loading, error, refetch } = useCallApi(
-    "https://dummyjson.com/products?limit=0",
-  );
+  const { products, loading, error, categories } = useProducts();
 
   useEffect(() => {
-    if (!data || !data.products) return;
-    setProducts(data.products);
 
-    setFilterProducts(data.products);
-
-    if (Array.isArray(data?.products)) {
-      const uniqueCategories = Array.from(
-        new Set(data?.products?.map((p) => p.category)),
-      );
-      setCategories(uniqueCategories);
-    }
+    setFilterProducts(products);
 
     if (category) {
       setSelectedCategory(category);
     } else {
       setSelectedCategory("All");
     }
-  }, [data, category]);
+  }, [products, category]);
 
   //Filter Logic
   const applyFilters = () => {
@@ -113,7 +99,7 @@ const Body = () => {
   //Main Render
   return (
     <>
-      {isHero && <Hero />}
+
     <div className="max-w-10xl mx-auto px-4 py-8">
       <h3 className="text-3xl font-semibold text-center text-gray-800  dark:text-white mb-8">
         {category ? `${category} Products`: "All Products"}
@@ -159,4 +145,4 @@ const Body = () => {
     // </div>
   );
 };
-export default Body;
+export default ProductListing;

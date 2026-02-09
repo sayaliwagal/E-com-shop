@@ -9,6 +9,7 @@ const Blog = lazy(() =>(import("./Blog.jsx")))
 // import Error from '/Error.jsx'
 import ProductDescp from './ProductDescp.jsx';
 import Header from '../Components/Header.jsx';
+import Home from './Home.jsx';
 import Footer from '../Components/Footer.jsx';
 import Women from '../Components/blog/Women.jsx';
 import Mens from '../Components/blog/Mens.jsx';
@@ -19,6 +20,7 @@ import ProtectedRoute from './ProtectedRoute.jsx';
 import WishList from './WishList.jsx';
 import Error from './Error.jsx';
 import OrderSuccess from './OrderSuccess.jsx';
+import ProductListing from '../Components/ProductListing.jsx';
 
 
 
@@ -32,8 +34,9 @@ const Layout = () => {
 
      <Routes>
       {/* Static route */}
-      <Route path="/" element = {<App searchText={searchText} />}/>
-      <Route path="/category/:category" element={<App searchText={searchText} />} />
+      <Route path="/" element = {<Home />}/>
+      <Route path="/category/:category" element={ <ProductListing />} />
+      <Route path="/products" element={<ProductListing />} />
       <Route path="/about" element = {<About />}/>
       <Route path="/contact" element = {<Contact />}/>
       <Route path="/cart" element = {<ProtectedRoute><Cart/></ProtectedRoute>}/>

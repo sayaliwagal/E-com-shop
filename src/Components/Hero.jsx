@@ -8,7 +8,7 @@ import useCallApi from '../Utils/useCallApi';
 import { useNavigate } from 'react-router';
 import NextArrow from './NextArrow.jsx';
 import PrevArrow from './PrevArrow.jsx';
-import { div, section } from 'motion/react-client';
+
 
 
 const Hero = () => {

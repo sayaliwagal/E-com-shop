@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css'
-import Body from './Components/Body';
+import Body from './Components/ProductListing';
 import useOnline from './Utils/useOnline';
 
 
