@@ -36,6 +36,7 @@ const Layout = () => {
       {/* Static route */}
       <Route path="/" element = {<Home />}/>
       <Route path="/category/:category" element={ <ProductListing />} />
+      <Route path="/products/:category" element={ <ProductListing />} />
       <Route path="/products" element={<ProductListing />} />
       <Route path="/about" element = {<About />}/>
       <Route path="/contact" element = {<Contact />}/>

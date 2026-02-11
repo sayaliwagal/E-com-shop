@@ -9,13 +9,16 @@ const CategorySection = ({ title, category, products}) => {
       {/* Header  */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">{title}</h2>
-        <button className="text-blue-600 font-semibold hover:underline">
+        <button 
+        onClick={() => navigate(`
+        /products/${category}`)}
+        className="text-blue-600 font-semibold hover:underline">
             See All
         </button>
       </div>
       {/* Products  */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {products?.slice(0,4).map(item => (
+        {products?.map(item => (
           <Card key={item.id} products={item} />
         ))}
       </div>
