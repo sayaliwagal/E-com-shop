@@ -8,15 +8,15 @@ import { BsCart2 } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import ThemeToggle from "./ThemeToggle.jsx";
+import { useAuth } from "../Utils/Context/AuthContext.jsx";
+import { Link } from "react-router";
 
 const Header = () => {
   // const [isLogedin, setIsLogedin] = useState(false);
-  const { cart, wishList, auth, logout } = useContext(CartContext);
+  const { cart, wishList, auth } = useContext(CartContext);
   const [open, setOpen] = useState(false);
   // const navigate = useNavigate();
-  const login = () => {
-    setIsLogedin(true);
-  };
+const { user, logout } = useAuth();
 
   // const move = () => {
   //   if (isLogedin) {
@@ -76,15 +76,30 @@ const Header = () => {
               <div className="mx-9">
               <ThemeToggle/>
               </div>
-              {!auth && (
-                <div className="hidden lg:block hover:text-purple-300 hover:bg-yellow-600 border-yellow-500 text-xl bg-yellow-500 p-2 rounded-md font-semibold">
-                  <NavLink to={"/login"}>Login</NavLink>
-                </div>
-              )}
-              {auth && (
-                <div className="hidden lg:block hover:text-gray-200 hover:bg-red-600 border-red-500 text-xl bg-red-500 p-2 rounded-md font-semibold">
-                  <button onClick={logout}>Logout</button>
-                </div>
+              {!user ? (
+                <>
+                <Link 
+                to= "/login"
+                className="px-4 py-2 border rounded">
+                  Login
+                </Link>
+                <Link 
+                to= "/signup"
+                className="px-4 py-2 bg-yellow-500 rounded ">
+                  Signup
+                </Link>
+                  </>
+              ): (
+                <>
+                <span className="font-semibold">
+                  Hi, {user.name}
+                </span>
+                <button
+                 onClick={logout}
+                 className="px-4 py-2 border rounded">
+                    Logout
+                 </button>
+                </>
               )}
             </div>
           </div>

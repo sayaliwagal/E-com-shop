@@ -8,11 +8,14 @@ import { CartProvider } from "./Utils/Context/CartContext.jsx";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "./Utils/Context/ThemeContext.jsx";
 import { ProductProvider } from "./Utils/Context/ProductContext.jsx";
+import { AuthProvider } from "./Utils/Context/AuthContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
+        <AuthProvider>
+
           <CartProvider>
         <ProductProvider>
             <DynamicTitle />
@@ -20,6 +23,7 @@ createRoot(document.getElementById("root")).render(
             <Toaster />
         </ProductProvider>
           </CartProvider>
+        </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,

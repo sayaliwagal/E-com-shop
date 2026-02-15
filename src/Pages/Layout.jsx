@@ -16,11 +16,13 @@ import Mens from '../Components/blog/Mens.jsx';
 import Kids from '../Components/blog/Kids.jsx';
 import {  Routes, Route, Navigate } from 'react-router';
 import LoginPage from './LoginPage.jsx';
+import SignUp from './SignUp.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import WishList from './WishList.jsx';
 import Error from './Error.jsx';
 import OrderSuccess from './OrderSuccess.jsx';
 import ProductListing from '../Components/ProductListing.jsx';
+import { ImPower } from 'react-icons/im';
 
 
 
@@ -53,6 +55,7 @@ const Layout = () => {
       <Route path='/products/:title/:id' element ={<ProductDescp/>}></Route>
       <Route path='/order-success' element ={<OrderSuccess/>}></Route>
       <Route path='/login' element ={<LoginPage />}></Route>
+      <Route path='/signup' element= {<SignUp />}></Route>
       <Route path='/*' element={<Error />} />
      </Routes>
       <Footer /> 

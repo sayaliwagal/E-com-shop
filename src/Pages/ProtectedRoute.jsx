@@ -1,14 +1,14 @@
-import { useContext } from 'react'
-import CartContext from '../Utils/Context/CartContext'
 import { Navigate } from 'react-router';
+import { useAuth } from '../Utils/Context/AuthContext';
 
 const ProtectedRoute = ({children}) => {
-    const {auth} = useContext(CartContext);
-    if(auth){
-        return children
-    }else{
-       return <Navigate to='/login' />
+    const { user } = useAuth();
+
+    if(!user){
+        return <Navigate to='/login' />
     }
-}
+        return children
+    
+};
 
 export default ProtectedRoute
