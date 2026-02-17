@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import  { accordionData } from '../constant.js'
 import AccordionSection from './AccordionSection'
 
 
@@ -9,33 +10,16 @@ const Accordion = () => {
   
     const setIsOpen = (index) => {
         setSectionIndex((prev) => {
-            return  prev === index?null :index;
+            return  prev === index? null :index;
         })
     }
-  const FAQ = [
-    {
-        qeution: "What is react?",
-        answer: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, eum."
-    },
-      {
-        qeution: "What is useState?",
-        answer: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, eum."
-    },
-      {
-        qeution: "What is useEffect?",
-        answer: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, eum."
-    },
-      {
-        qeution: "What is useRef?",
-        answer: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, eum."
-    },
-]
+  
     return (
-    <div className='w-1/2 border m-auto'>
+    <div className='w-1/2 flex flex-col gap-10 justify-between m-auto'>
        {
-           FAQ.map((items, index) => {
+accordionData.map((items, index) => {
               return ( <AccordionSection
-               qeution={items.qeution}
+               question={items.question }
                answer={items.answer}
                key={index}
                isOpen={sectionIndex === index}

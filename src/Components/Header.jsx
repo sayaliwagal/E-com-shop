@@ -28,7 +28,7 @@ const { user, logout } = useAuth();
   // const isOnline = useOnline();
   return (
     <div className="flex">
-      <header className="bg-gray-800 text-white w-full shadow-md sticky top-0 z-40">
+      <header className="bg-gray-800 text-white w-full shadow-md sticky top-0 z-50">
         <nav className="flex justify-between item-center px-5 py-4 md:px-12">
           <div className="flex w-full items-center justify-between gap-3">
             <img src={logo} alt="logo" className="h-20 w-auto" />

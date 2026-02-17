@@ -139,3 +139,67 @@ export const banners = [
 ];
 
 
+export const accordionData = [
+  
+  {
+    "id": 1,
+    "question": "How do I place an order?",
+    "answer": "Browse products, add items to your cart, then proceed to checkout. Fill in your shipping details and complete payment to place your order."
+  },
+  {
+    "id": 2,
+    "question": "Do I need an account to shop?",
+    "answer": "Yes, creating an account allows you to track orders, manage your wishlist, and enjoy faster checkout."
+  },
+  {
+    "id": 3,
+    "question": "How can I track my order?",
+    "answer": "After placing your order, go to 'My Orders' in your account dashboard to view real-time tracking information."
+  },
+  {
+    "id": 4,
+    "question": "What payment methods do you accept?",
+    "answer": "We accept Credit/Debit Cards, UPI, Net Banking, and Cash on Delivery (where available)."
+  },
+  {
+    "id": 5,
+    "question": "Can I cancel or modify my order?",
+    "answer": "Orders can be cancelled or modified before shipment from your order history page."
+  },
+  {
+    "id": 6,
+    "question": "What is your return policy?",
+    "answer": "Products can be returned within 7 days of delivery if unused and in original packaging."
+  },
+  {
+    "id": 7,
+    "question": "How do refunds work?",
+    "answer": "Once your return is approved, refunds are processed within 3–5 business days to your original payment method."
+  },
+  {
+    "id": 8,
+    "question": "How do I apply a coupon code?",
+    "answer": "Enter your coupon code at checkout before completing payment to receive the discount."
+  },
+  {
+    "id": 9,
+    "question": "Is Cash on Delivery available?",
+    "answer": "Yes, COD is available for selected locations and products."
+  },
+  {
+    "id": 10,
+    "question": "How can I contact customer support?",
+    "answer": "You can reach us through the Contact page or email support@eshop.com for assistance."
+  },
+  {
+    "id": 11,
+    "question": "How do I add products to wishlist?",
+    "answer": "Click the heart icon on any product to save it to your wishlist."
+  },
+  {
+    "id": 12,
+    "question": "Are my payment details secure?",
+    "answer": "Yes. We use secure encryption and trusted payment gateways to protect your data."
+  }
+
+];
