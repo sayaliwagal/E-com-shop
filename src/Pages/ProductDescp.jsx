@@ -70,7 +70,7 @@ const ProductDescp = () => {
       <div className="min-h-screen bg-gray-50 p-2 animate-pulse">
         <div className="w-full flex flex-col md:flex-row gap-8 bg-white p-8 rounded-2xl">
           {/* Left Tumbnails  */}
-          <div className="flex flex-col gap- min-w-[300px]">
+          <div className="flex flex-col gap-2 min-w-[300px]">
             {Array.from({ length: 4 }).map((_, i) => {
               return (
                 <div
@@ -114,10 +114,10 @@ const ProductDescp = () => {
   //Main Product UI.
   return (
     <div>
-      <div className="min-h-screen bg-gray-50 p-8">
-        <div className="max-w-full mx-5 flex flex-col md:flex-row gap-8 bg-white p-6 rounded-2xl shadow-lg">
+      <div className="min-h-screen bg-gray-50  ">
+        <div className="max-w-full mx-5 flex  md:flex-row gap-8 bg-gray-50 p-8 rounded-2xl">
           {/* Left Thumbnails  */}
-          <div className="flex flex-col gap-4">
+          <div className="hidden md:flex flex-col gap-4">
             {data?.images?.map((imag, i) => {
               return (
                 <img
@@ -125,7 +125,7 @@ const ProductDescp = () => {
                   alt="thumbnail"
                   onMouseEnter={() => setMainImage(imag)} //change main image on hover
                   key={i}
-                  className={`w-90 h-40 object-contain border-2 rounded-md cursor-pointer transition-all duration-300 ${
+                  className={`w-30 object-contain border-2 rounded-md cursor-pointer transition-all duration-300 ${
                     mainImage === imag ? "border-blue-500" : "border-gray-200"
                   } hover:scale-105`}
                 />
@@ -135,7 +135,7 @@ const ProductDescp = () => {
 
           {/* Main Image  */}
 
-            <div className="flex flex-col item-center justify-center">
+            <div className="flex flex-col items-center justify-center">
 
             <ProductZoomImage
               src={mainImage}
@@ -146,7 +146,7 @@ const ProductDescp = () => {
 
               {zoomVisible && (
                 <div 
-                className="w-full h-[600px] border overflow-hidden rounded-md shadow-lg bg-white hidden lg:block"
+                className="w-full h-[600px]  overflow-hidden rounded-md shadow-lg bg-white hidden lg:block"
                 style={{
                   backgroundImage: `url(${mainImage})`,
                   backgroundRepeat: "no-repeat",
@@ -186,7 +186,7 @@ const ProductDescp = () => {
                       Available Offers
                     </h3>
                     <ul className="space-y-1 text-gray-700">
-                      <li className="flex item-center gap-2">
+                      <li className="flex items-center gap-2">
                         <FaTag className="text-green-500" />
                         Get extra 15% off (price inclusive of discount)
                       </li>
@@ -194,7 +194,7 @@ const ProductDescp = () => {
                         <FaTag className="text-green-500" />
                         10% cashback on orders above $999
                       </li>
-                      <li className="flex items-center hap-2">
+                      <li className="flex items-center gap-2">
                         <FaTag className="text-green-500" />
                         Free delivery for Plus members
                       </li>

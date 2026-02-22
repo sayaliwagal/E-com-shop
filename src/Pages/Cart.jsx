@@ -2,11 +2,23 @@ import React, { useContext, useEffect, useState } from "react";
 import CartContext from "../Utils/Context/CartContext";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { Link } from "react-router";
+import {  useDispatch, useSelector } from "react-redux";
+import { removeFromCart, clearCart } from "../Features/cart/cartSlice";
+
 
 const Cart = () => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
+
+  const handlRemove  = (id) =>{
+    dispatch(removeFromCart(id));
+  }
+  const handleClearAll = () => {
+    dispatch(clearCart());
+  }
   const {
     cart,
-    clearCart,
+    // clearCart,
     removeProduct,
     increaseQty,
     decreaseQty,
@@ -21,10 +33,10 @@ const Cart = () => {
   return (
     <>
       <div className="flex justify-center items-center flex-wrap gap-6">
-        {cart.length === 0 ? (
+        {cartItems.length === 0 ? (
           <h1>Cart is Empty</h1>
         ) : (
-          cart?.map((item) => {
+          cartItems?.map((item) => {
             return (
               <div className="card" key={item?.id}>
                 <img
@@ -37,7 +49,7 @@ const Cart = () => {
                 <h3>$ {item?.price * item?.qty}</h3>
                 <button
                   onClick={() => {
-                    removeProduct(item);
+                    handlRemove(item.id);
                   }}
                 >
                   Remove
@@ -56,12 +68,12 @@ const Cart = () => {
           })
         )}
       </div>
-      {cart.length > 0 && (
+      {cartItems.length > 0 && (
         <div className="rightBar">
           <h3>Total Items</h3>
           <h6>total:{totalItems}</h6>
           <h4>Total Price : ${total}</h4>
-          <button onClick={() => clearCart()}>Remove All</button>
+          <button onClick={handleClearAll}>Remove All</button>
           <button>
             <Link to = {"/checkout"}>Prceed to Buy</Link>
             </button>

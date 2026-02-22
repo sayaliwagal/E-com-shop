@@ -10,6 +10,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import ThemeToggle from "./ThemeToggle.jsx";
 import { useAuth } from "../Utils/Context/AuthContext.jsx";
 import { Link } from "react-router";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   // const [isLogedin, setIsLogedin] = useState(false);
@@ -17,6 +18,8 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   // const navigate = useNavigate();
 const { user, logout } = useAuth();
+
+const cartItems = useSelector((state) => state.cart.items)
 
   // const move = () => {
   //   if (isLogedin) {
@@ -61,7 +64,7 @@ const { user, logout } = useAuth();
               >
                 <BsCart2 size={30} />
                 <span className="absolute top-1 right-3 bg-red-500 text-white text-xs rounded-full px-2">
-                  {cart.length}
+                  {cartItems.length}
                 </span>
               </NavLink>
               <NavLink

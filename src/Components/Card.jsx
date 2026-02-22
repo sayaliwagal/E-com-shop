@@ -2,13 +2,19 @@ import { useContext } from "react";
 import { Link } from "react-router";
 import CartContext from "../Utils/Context/CartContext";
 import { FaRegHeart } from "react-icons/fa6";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Features/cart/cartSlice";
 
 export const Card = (props) => {
+  const dispatch = useDispatch();
+
+  const handleAdd = (products)=>{
+    dispatch(addToCart(products))
+  }
   // console.log(props);
   const {products} = props;
   const {thumbnail, title, category, price, rating, id} = products;
-  const {addCart, addWishList} = useContext(CartContext);
+  const { addWishList} = useContext(CartContext);
       return(
         <>
           <div className="card">
@@ -22,7 +28,7 @@ export const Card = (props) => {
             <p className="rating">{rating.rate}</p>
           </Link>
           <p>{props.children}</p>
-          <button onClick={() => addCart(products)}>Add To Cart</button>
+          <button onClick={() => handleAdd(products)}>Add To Cart</button>
           <button onClick={() => addWishList(products)}> <FaRegHeart size={30}/></button>
           
           </div>

@@ -9,6 +9,8 @@ import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "./Utils/Context/ThemeContext.jsx";
 import { ProductProvider } from "./Utils/Context/ProductContext.jsx";
 import { AuthProvider } from "./Utils/Context/AuthContext.jsx";
+import { Provider } from "react-redux";
+import { store } from "./app/store.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -18,9 +20,11 @@ createRoot(document.getElementById("root")).render(
 
           <CartProvider>
         <ProductProvider>
+          <Provider store={store}>
             <DynamicTitle />
             <Layout />
             <Toaster />
+          </Provider>
         </ProductProvider>
           </CartProvider>
         </AuthProvider>
