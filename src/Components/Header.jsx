@@ -65,7 +65,7 @@ const cartItems = useSelector((state) => state.cart.items)
               >
                 <BsCart2 size={30} />
                 <span className="absolute top-1 right-3 bg-red-500 text-white text-xs rounded-full px-2">
-                  {/* {cartItems.length} */}
+                  {cartItems.length}
                 </span>
               </NavLink>
               <NavLink
