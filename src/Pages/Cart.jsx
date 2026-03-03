@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import CartContext from "../Utils/Context/CartContext";
+import React, { useEffect } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
-import {  useDispatch, useSelector } from "react-redux";
-import { removeFromCart, clearCart } from "../Features/cart/cartSlice";
+import { removeFromCart, clearCart, increaseQty, decreaseQty, selectTotalPrice, totalItems } from "../Features/cart/cartSlice";
 
 
 const Cart = () => {
@@ -16,20 +15,18 @@ const Cart = () => {
   const handleClearAll = () => {
     dispatch(clearCart());
   }
-  const {
-    cart,
-    // clearCart,
-    removeProduct,
-    increaseQty,
-    decreaseQty,
-    totalPrice,
-  } = useContext(CartContext);
 
-  const total = totalPrice();
-  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-  // useEffect(() => {
-  //   setTotal(total);
-  // }, [cart]);
+  const handleIncreaseQty = (id) => {
+    dispatch(increaseQty(id))
+  }
+  const handleDecreaseQty = (id) => {
+    dispatch(decreaseQty(id));
+  }
+  
+  const total = useSelector(selectTotalPrice);
+
+  console.log("Total Price:", total); 
+  const totalItem = useSelector(totalItems)
   return (
     <>
       <div className="flex justify-center items-center flex-wrap gap-6">
@@ -55,11 +52,11 @@ const Cart = () => {
                   Remove
                 </button>
                 <div className="flex items-center gap-3">
-                  <button onClick={() => increaseQty(item)}>
+                  <button onClick={() => handleIncreaseQty(item.id)}>
                     <FaPlus />
                   </button>
                   <span>{item.qty}</span>
-                  <button onClick={() => decreaseQty(item)}>
+                  <button onClick={() => handleDecreaseQty(item.id)}>
                     <FaMinus />
                   </button>
                 </div>
@@ -71,8 +68,8 @@ const Cart = () => {
       {cartItems.length > 0 && (
         <div className="rightBar">
           <h3>Total Items</h3>
-          <h6>total:{totalItems}</h6>
-          <h4>Total Price : ${total}</h4>
+          <h6>total: {totalItem}</h6>
+          <h4>Total Price: ${total}</h4>
           <button onClick={handleClearAll}>Remove All</button>
           <button>
             <Link to = {"/checkout"}>Prceed to Buy</Link>

@@ -11,6 +11,7 @@ export const Card = (props) => {
   const handleAdd = (products)=>{
     dispatch(addToCart(products))
   }
+ 
   // console.log(props);
   const {products} = props;
   const {thumbnail, title, category, price, rating, id} = products;

@@ -5,10 +5,10 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   //Load from localStorage
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+  // const [cart, setCart] = useState(() => {
+  //   const savedCart = localStorage.getItem("cart");
+  //   return savedCart ? JSON.parse(savedCart) : [];
+  // });
   const [wishList, setWishList] = useState(() => {
     const savedWishList = localStorage.getItem("wishList");
     return savedWishList ? JSON.parse(savedWishList) : [];
@@ -16,9 +16,9 @@ export const CartProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
 
   //Sync with localStorage whenever data changes
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+  // useEffect(() => {
+  //   localStorage.setItem("cart", JSON.stringify(cart));
+  // }, [cart]);
 
   useEffect(() => {
     localStorage.setItem("wishList", JSON.stringify(wishList));
@@ -125,7 +125,7 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
-        cart,
+        // cart,
         addCart,
         clearCart,
         removeProduct,

@@ -6,4 +6,10 @@ export const store = configureStore({
     reducer :{
         cart: cartReducer,
     }
-})
+});
+
+// store.subscribe(() =>{
+//     const state = store.getState();
+//     if(state.cart?.items)
+//     localStorage.setItem("cart", JSON.stringify(state.cart.items))
+// })

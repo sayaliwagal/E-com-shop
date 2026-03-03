@@ -1,18 +1,24 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import CartContext from '../Utils/Context/CartContext'
+import { removeFromCart, clearCart, increaseQty, decreaseQty, selectTotalPrice, totalItems } from "../Features/cart/cartSlice";
+import { useSelector, useDispatch } from 'react-redux';
 import PriceRow from '../Components/checkout/PriceRow'
 import toast from "react-hot-toast";
 
 const OrderSummary = () => {
-  const { cart, totalPrice, clearCart } = useContext(CartContext);
+  const cartItems = useSelector((state) => state.cart.items);
+  const totalPrice = useSelector(selectTotalPrice);
+  const dispatch = useDispatch();
+  const handClearCart = () => dispatch(clearCart());
+
     const navigate = useNavigate();
 
   const subTotal = totalPrice();
   const delivery = subTotal > 500 ? 0 : 50;
   const total = subTotal + delivery;
 
-  if(cart.length === 0) {
+  if(cartItems.length === 0) {
     return (
       <p className="text-center text-slate-400">
         Your Cart is Empty.
@@ -21,7 +27,7 @@ const OrderSummary = () => {
   }
   
   const handlePlaceOrder = () => {
-    if(cart.length === 0) {
+    if(cartItems.length === 0) {
       toast.error("Cart is empty");
       return;
     }
@@ -41,7 +47,7 @@ const OrderSummary = () => {
         Order Summary
         </h2>
 
-        {cart.map(item => (
+        {cartItems.map(item => (
           <div key={item.id} className="flex justify-between text-sm mb-2">
             <span>{item.title}</span>
             <span>$ {item.price}</span>
