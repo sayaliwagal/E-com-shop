@@ -14,7 +14,7 @@ const OrderSummary = () => {
 
     const navigate = useNavigate();
 
-  const subTotal = totalPrice();
+  const subTotal = totalPrice;
   const delivery = subTotal > 500 ? 0 : 50;
   const total = subTotal + delivery;
 
@@ -62,7 +62,7 @@ const OrderSummary = () => {
            
         <button 
         onClick={handlePlaceOrder}
-        disabled={cart.length=== 0} className='w-full mt-6 bg-green-600 hover:bg-green-700 disabled:backdrop-opacity-30 text-white py-3 rounded-lg font-semibold'>
+        disabled={cartItems.length=== 0} className='w-full mt-6 bg-green-600 hover:bg-green-700 disabled:backdrop-opacity-30 text-white py-3 rounded-lg font-semibold'>
           Place Order
         </button>
 

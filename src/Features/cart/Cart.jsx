@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
-import { removeFromCart, clearCart, increaseQty, decreaseQty, selectTotalPrice, totalItems } from "../Features/cart/cartSlice";
+import { removeFromCart, clearCart, increaseQty, decreaseQty, selectTotalPrice, totalItems } from '../cart/cartSlice.js';
 
 
 const Cart = () => {
