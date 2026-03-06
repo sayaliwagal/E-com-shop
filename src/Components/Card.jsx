@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import { Link } from "react-router";
-import CartContext from "../Utils/Context/CartContext";
 import { FaRegHeart } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../Features/cart/cartSlice";
@@ -23,7 +21,6 @@ export const Card = (props) => {
   // console.log(props);
   const {products} = props;
   const {thumbnail, title, category, price, rating, id} = products;
-  // const { addWishList} = useContext(CartContext);
    const isLiked = wishListItems.some((item)=> item.id === products.id);
       return(
         <>

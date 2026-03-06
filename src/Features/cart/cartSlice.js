@@ -2,18 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
 
-/*const loadCartFromStorage = () => {
-    try{
-        const data = localStorage.getItem("cart");
-        return data ? JSON.parse(data) : [];
-    } catch{
-        return [];
-    }
-}*/
+// const loadCartFromStorage = () => {
+//     try{
+//         const data = localStorage.getItem("cart");
+//         return data ? JSON.parse(data) : [];
+//     } catch{
+//         return [];
+//     }
+// }
 
 const initialState = {
     // items : loadCartFromStorage(),
     items : [],
+
 };
 
 const cartSlice = createSlice({

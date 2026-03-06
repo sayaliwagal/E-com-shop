@@ -2,8 +2,19 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { addToCart } from "../cart/cartSlice";
 
+
+// const loadWishListFromStorage = () => {
+//     try{ 
+//         const data = localStorage.getItem("wishList");
+//         return data? JSON.parse(data): [];
+//     }catch{
+//         return [];
+//     }
+// }
+
 const initialState = {
-    items : [],
+    // items: loadWishListFromStorage(),
+    items: [],
 }
 
 // Create the thunk for moving item to cart

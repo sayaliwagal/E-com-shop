@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import useCallApi from "../Utils/useCallApi";
 import Accordion from "../Components/Accordion";
 import { FaHeart, FaTag } from "react-icons/fa";
 import Error from "./Error.jsx";
 import StarRating from "../Components/StarRating.jsx";
-import CartContext from "../Utils/Context/CartContext.jsx";
 import {useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../Features/cart/cartSlice.js";
 import { addToWishList, removeFromWishList } from "../Features/wishlist/wishlistSlice.js";
@@ -30,8 +29,6 @@ const handleRemoveWishList = (product) => {
   dispatch(removeFromWishList(product));
 }
 
-  const { cart, addCart, wishList, addWishList, removeWishList } =
-    useContext(CartContext);
   const [liked, setLiked] = useState(false);
   const [inCart, setInCart] = useState(false);
   const [zoomVisible, setZoomVisible] = useState(false);

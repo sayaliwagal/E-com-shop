@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
-import CartContext from '../Utils/Context/CartContext'
-import { removeFromCart, clearCart, increaseQty, decreaseQty, selectTotalPrice, totalItems } from "../Features/cart/cartSlice";
+import { clearCart, selectTotalPrice } from "../Features/cart/cartSlice";
 import { useSelector, useDispatch } from 'react-redux';
 import PriceRow from '../Components/checkout/PriceRow'
 import toast from "react-hot-toast";
@@ -38,7 +37,7 @@ const OrderSummary = () => {
       return;
     }
     localStorage.setItem("shippingAddress", JSON.stringify(addressData));
-    clearCart();
+    handClearCart();
     navigate("/order-success");
   };
   return (

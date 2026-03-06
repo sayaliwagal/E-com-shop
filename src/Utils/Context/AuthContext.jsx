@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const [auth, setAuth] = useState(false);
     const [ user, setUser ] = useState(null);
 
  // Load user from loacalStorage on app start.
@@ -60,7 +61,7 @@ export const AuthProvider = ({ children }) => {
     }
     localStorage.setItem("authUser", JSON.stringify(found));
     setUser(found);
-
+    setAuth(true);
     toast.success("Loging successful");
     return true;
  };
@@ -69,11 +70,13 @@ export const AuthProvider = ({ children }) => {
  const logout = () => {
     localStorage.removeItem("authUser");
     setUser(null);
+    setAuth(false);
     toast.success("Logged out");
  };
+ 
 
  return (
-    <AuthContext.Provider value={{ user, signup,login, logout}}>
+    <AuthContext.Provider value={{ user, signup,login, logout, auth }}>
         {children}
     </AuthContext.Provider>
  );
