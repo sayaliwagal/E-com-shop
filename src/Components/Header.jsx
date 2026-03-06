@@ -14,12 +14,14 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   // const [isLogedin, setIsLogedin] = useState(false);
-  const { wishList, auth } = useContext(CartContext);
+  // const { wishList, const 
+  const {auth } = useContext(CartContext);
   const [open, setOpen] = useState(false);
   // const navigate = useNavigate();
 const { user, logout } = useAuth();
 
-const cartItems = useSelector((state) => state.cart.items)
+const cartItems = useSelector((state) => state.cart.items);
+const wishListItems = useSelector((state) => state.wishList.items);
 // console.log(cartItems);
 
   // const move = () => {
@@ -74,7 +76,7 @@ const cartItems = useSelector((state) => state.cart.items)
               >
                 <FaRegHeart size={30} />
                 <span className="absolute top-1 right-3 bg-red-500 text-white text-xs rounded-full px-2">
-                  {wishList.length}
+                  {wishListItems.length}
                 </span>
               </NavLink>
               <div className="mx-9">

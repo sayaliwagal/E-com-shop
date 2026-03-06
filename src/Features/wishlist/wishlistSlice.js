@@ -1,15 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
+import { addToCart } from "../cart/cartSlice";
 
 const initialState = {
     items : [],
 }
 
+// Create the thunk for moving item to cart
+export const moveToCart = createAsyncThunk(
+    'wishList/moveToCart',
+    async (item, { dispatch, getState }) => {
+        // Dispatch remove from wishlist
+        dispatch(removeFromWishList(item));
+        // Dispatch add to cart
+        dispatch(addToCart(item));
+        // Show success message
+        toast.success(`${item.title} moved to cart!`);
+    }
+);
+
 const wishListSlice = createSlice({
     name : "wishList",
     initialState,
     reducers : {
-        addToWishList : (state, action) => {
+        addToWishList : ((state, action) =>{
             const existingItem = state.items.find((item) => 
             (item.id === action.payload.id));
             if(existingItem){
@@ -18,27 +32,21 @@ const wishListSlice = createSlice({
             }else{
                 state.items.push(action.payload);
                 toast.success(`${action.payload.title} successfully added to wishList!`);
+
             }
-        },
-        removeFromWishList : (state, action) => {
-            const item = state.items.find((item) =>
-                item.id === action.payload
-            );
-            state.items = state.items.filter(
-                (item) => item.id !== action.payload
-            );
-            if(item)
-            toast.success(`${item.title} has been removed from wishList!`);
-        },
-        clearWishList: (state) => {
-            state.items = [];
-            toast.success("All items has been removed from wishList!!");
-        },
-        isLiked: (state, action) => {
-            return state.items.some((item) => item.id === action.payload);
-        }
-    }
+    }),
+
+    removeFromWishList : ((state, action) => {
+        const wishListItems = state.items.filter((item) => item.id !== action.payload.id);
+        state.items = wishListItems;
+        toast.success(`${action.payload.title} removed from wishList!`);
+    }),
+
+    // Removed the old moveToCart reducer since it's now a thunk
+}
+
 });
 
-export const { addToWishList, removeFromWishList, clearWishList, isLiked } = wishListSlice.actions;
+
+export const { addToWishList, removeFromWishList } = wishListSlice.actions;
 export default wishListSlice.reducer;

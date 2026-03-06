@@ -18,7 +18,7 @@ import {  Routes, Route, Navigate } from 'react-router';
 import LoginPage from './LoginPage.jsx';
 import SignUp from './SignUp.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
-import WishList from './WishList.jsx';
+import WishList from './WishListPage.jsx';
 import Error from './Error.jsx';
 import OrderSuccess from './OrderSuccess.jsx';
 import ProductListing from '../Components/ProductListing.jsx';

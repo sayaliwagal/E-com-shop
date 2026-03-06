@@ -6,11 +6,30 @@ import { FaHeart, FaTag } from "react-icons/fa";
 import Error from "./Error.jsx";
 import StarRating from "../Components/StarRating.jsx";
 import CartContext from "../Utils/Context/CartContext.jsx";
+import {useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../Features/cart/cartSlice.js";
+import { addToWishList, removeFromWishList } from "../Features/wishlist/wishlistSlice.js";
 import ProductZoomImage from "../Components/ProductZoomImage.jsx";
 
 const ProductDescp = () => {
   const { title, id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+const CartItems = useSelector((state) => state.cart.items);
+const wishListItems = useSelector((state) => state.wishList.items);
+
+const handleAddToCart = (product) => {
+  dispatch(addToCart(product));
+}
+
+const handleAddToWishList = (product) => {
+  dispatch(addToWishList(product));
+}
+
+const handleRemoveWishList = (product) => {
+  dispatch(removeFromWishList(product));
+}
+
   const { cart, addCart, wishList, addWishList, removeWishList } =
     useContext(CartContext);
   const [liked, setLiked] = useState(false);
@@ -30,36 +49,36 @@ const ProductDescp = () => {
   //Check if product is already in wishlist or not
   useEffect(() => {
     if (data) {
-      const inWishList = wishList.some((item) => item.id === data.id);
+      const inWishList = wishListItems.some((item) => item.id === data.id);
       setLiked(inWishList);
     }
-  }, [wishList, data]);
+  }, [wishListItems, data]);
 
   // Handle wishlist toggle
 
   //togle for like
   const handleWishListClick = (product) => {
     if (liked) {
-      removeWishList(product); //remove form wishlist
+      handleRemoveWishList (product); //remove form wishlist
     } else {
-      addWishList(product); //wishlist add logic.
+      handleAddToWishList(product); //wishlist add logic.
     }
     setLiked((prev) => !prev); //toggle
   };
 
   useEffect(() => {
     if (data) {
-      const inCartList = cart.some((item) => item.id === data.id);
+      const inCartList = CartItems.some((item) => item.id === data.id);
       setInCart(inCartList);
     }
-  }, [cart, data]);
+  }, [CartItems, data]);
 
   //Hande Cart
   const handleCartClick = (product) => {
     if (inCart) {
       navigate("/cart"); //go to the cart page
     } else {
-      addCart(product); //add to cart
+      handleAddToCart(product); //add to cart
       setInCart(true); //Update button state
     }
   };

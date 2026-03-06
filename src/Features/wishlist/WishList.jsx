@@ -1,12 +1,18 @@
-import React, { useContext } from "react";
-import CartContext from "../Utils/Context/CartContext";
-import { useSelector } from "react-redux";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromWishList, moveToCart } from "./wishlistSlice.js";
 
 const WishList = () => {
   const wishListItems = useSelector((state) => state.wishList.items);
-  const { 
-    // wishList,
-     removeWishList, moveToCart } = useContext(CartContext);
+  const dispatch = useDispatch();
+const handleRemoveFromWishList = (item) => {
+  dispatch(removeFromWishList(item)); 
+}; 
+const handleMoveToCart = (items) => {
+  dispatch(moveToCart(items));
+}
+
+
 
   if (wishListItems.length === 0) {
     return <h1> WishList is Empty</h1>;
@@ -25,12 +31,12 @@ const WishList = () => {
               <h3 className="have">{item?.category}</h3>
               <h3>$ {item?.price}</h3>
               <button onClick={() => {
-                  removeWishList(item);
+                  handleRemoveFromWishList(item);
                }} >
                 Remove
               </button>
                <button onClick={() => {
-                  moveToCart(item);
+                  handleMoveToCart(item);
                }} >
                 Move to Cart 
               </button>
