@@ -11,7 +11,7 @@ import { addToWishList, removeFromWishList } from "../Features/wishlist/wishlist
 import ProductZoomImage from "../Components/ProductZoomImage.jsx";
 
 const ProductDescp = () => {
-  const { title, id } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 const CartItems = useSelector((state) => state.cart.items);
