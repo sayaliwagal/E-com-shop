@@ -9,7 +9,7 @@ const DynamicTitle = () => {
        
       //Product details page.
       if(!newTitle){
-        //check dynamic rote
+        //check dynamic route
         const productMatch = matchPath("/products/:title/:id", location.pathname);
         if(productMatch){
           const {title, id} = productMatch.params;
@@ -17,15 +17,24 @@ const DynamicTitle = () => {
         }
       }
 
-        //Category page
-        if(!newTitle) {
-          const categoryMatch = matchPath("/category/:category", location.pathname);
-
-          if(categoryMatch) {
-            const { category } = categoryMatch.params;
-            newTitle = `${category.replace("-", " ")}`
+      // Product list with category page
+      if(!newTitle) {
+        const categoryMatch = matchPath("/products/:category", location.pathname);
+        if(categoryMatch){
+          const { category } = categoryMatch.params;
+          if(category === "all") {
+            newTitle = "All Products";
+          } else {
+            newTitle = `${category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, " ")} Products`;
           }
         }
+      }
+
+      // Base products route (no category)
+      if(!newTitle && location.pathname === "/products") {
+        newTitle = "All Products";
+      }
+
       if(!newTitle){
         newTitle = titles["/*"] || "Page not found";
       }

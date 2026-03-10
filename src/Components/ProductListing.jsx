@@ -23,6 +23,7 @@ const ProductListing = () => {
   const { products, loading, error, categories } = useProducts();
 
   useEffect(() => {
+    console.log('ProductListing useEffect - category from URL:', category, 'selectedCategory will be:', category || "All");
 
     setFilterProducts(products);
 
@@ -37,16 +38,10 @@ const ProductListing = () => {
   const applyFilters = () => {
     let filtered = filterValues(products, searchText);
     filtered = filterByCategoryAndPrice(
-      filtered, 
-      selectedCategory === "All" ? null : selectedCategory, 
+      filtered,
+      selectedCategory === "All" ? null : selectedCategory,
       priceRange);
-    setFilterProducts(filtered);
-  };
-
-  useEffect(() => {
-    applyFilters();
-  }, [searchText, selectedCategory, priceRange, products]);
-
+    console.log('ProductListing - applyFilters result:', filtered.length, 'products for category:', selectedCategory);
   const ref = useRef(null);
 
   const handleRef = () => {

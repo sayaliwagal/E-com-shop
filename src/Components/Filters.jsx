@@ -15,9 +15,9 @@ const Filters = ({
     setSelectedCategory(category)
 
     if(category === "All") {
-      navigate("/");
+      navigate("/products");
     }else{
-      navigate(`/category/${category}`);
+      navigate(`/products/${category}`);
     }
   }
   return (
@@ -25,7 +25,7 @@ const Filters = ({
   {/* Category Dropdown */}
   <select
     value={selectedCategory}
-    onChange={(e) => setSelectedCategory(e.target.value)}
+    onChange={(e) => handleCategoryChange(e.target.value)}
     className="border border-gray-300 rounded-lg px-3 py-2 text-gray-700  dark:text-white dark:bg-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
   >
     <option value="All">All Categories</option>

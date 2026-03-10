@@ -16,13 +16,14 @@
 
   export const filterByCategoryAndPrice = (products, category, priceRange = [0, Infinity]) => {
     if(!Array.isArray(products)) return [];
-    
-    let filtered = [...products];
 
+    let filtered = [...products];
 
     if(category && category !== "All"){
       filtered = filtered.filter((item) => {
-        return item.category?.toLowerCase().includes(category.toLowerCase());
+        return item.category?.toLowerCase() === category.toLowerCase() ||
+               item.category?.toLowerCase().includes(category.toLowerCase()) ||
+               category.toLowerCase().includes(item.category?.toLowerCase());
       });
     }
 

@@ -1,14 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const getInitialTheme = () => {
-    if (typeof window !== 'undefined') {
-        return localStorage.getItem("theme") || "light";
-    }
-    return "light";
-};
-
 const initialState = {
-    mode: getInitialTheme(),
+    mode: "light", // Default to light, will be overridden by persisted state
 };
 
 const themeSlice = createSlice({
@@ -17,27 +10,11 @@ const themeSlice = createSlice({
     reducers: {
         toggleTheme: (state) => {
             state.mode = state.mode === "light" ? "dark" : "light";
-            if (typeof window !== 'undefined') {
-                localStorage.setItem("theme", state.mode);
-                const root = window.document.documentElement;
-                if (state.mode === "dark") {
-                    root.classList.add("dark");
-                } else {
-                    root.classList.remove("dark");
-                }
-            }
+            // DOM manipulation happens in middleware (see store.js)
         },
         setTheme: (state, action) => {
             state.mode = action.payload;
-            if (typeof window !== 'undefined') {
-                localStorage.setItem("theme", state.mode);
-                const root = window.document.documentElement;
-                if (state.mode === "dark") {
-                    root.classList.add("dark");
-                } else {
-                    root.classList.remove("dark");
-                }
-            }
+            // DOM manipulation happens in middleware (see store.js)
         }
     }
 });

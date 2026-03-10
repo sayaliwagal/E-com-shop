@@ -1,20 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css'
 import Body from './Components/ProductListing';
-import { useSelector, useDispatch } from 'react-redux';
-import { setTheme } from './Features/theme/ThemeSlice';
+import { useSelector } from 'react-redux';
 import useOnline from './Utils/useOnline';
 
 
 function App() {
   const theme = useSelector((state) => state.theme.mode);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    // Initialize theme from localStorage on app start
-    const savedTheme = localStorage.getItem("theme") || "light";
-    dispatch(setTheme(savedTheme));
-  }, [dispatch]);
 
     const isOnline = useOnline();
   if (!isOnline) {

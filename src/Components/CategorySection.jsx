@@ -3,6 +3,7 @@ import { useNavigate  } from 'react-router'
 import { Card } from './Card'
 
 const CategorySection = ({ title, category, products}) => {
+  console.log(`CategorySection rendered with category: ${category}`);
     const navigate = useNavigate();
   return (
     <section className='px-6 md:px-20 py-10'>
