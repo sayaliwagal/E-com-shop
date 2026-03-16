@@ -12,7 +12,6 @@ import { Provider } from "react-redux";
 import { store } from "./app/store.js";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
     <BrowserRouter>
         <AuthProvider>
           <CartProvider>
@@ -26,5 +25,4 @@ createRoot(document.getElementById("root")).render(
           </CartProvider>
         </AuthProvider>
     </BrowserRouter>
-  </StrictMode>,
 );

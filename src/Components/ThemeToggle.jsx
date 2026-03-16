@@ -1,7 +1,7 @@
 // import { use, useContext } from 'react'
 // import ThemeContext from '../Utils/Context/ThemeContext'
 import { useSelector, useDispatch  } from 'react-redux';
-import { toggleTheme } from '../Features/theme/themeSlice';
+import { toggleTheme } from '../Features/theme/themeSlice.js';
 import { FaSun, FaMoon} from 'react-icons/fa';
 const ThemeToggle = () => {
   const themeItems = useSelector((state) => state.theme);

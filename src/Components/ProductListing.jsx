@@ -21,11 +21,10 @@ const ProductListing = () => {
   // const [loading, setLoading] = useState(true);
 
   const { products, loading, error, categories } = useProducts();
+  const ref = useRef(null);
 
   useEffect(() => {
     console.log('ProductListing useEffect - category from URL:', category, 'selectedCategory will be:', category || "All");
-
-    setFilterProducts(products);
 
     if (category) {
       setSelectedCategory(category);
@@ -33,6 +32,10 @@ const ProductListing = () => {
       setSelectedCategory("All");
     }
   }, [products, category]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [products, searchText, selectedCategory, priceRange]);
 
   //Filter Logic
   const applyFilters = () => {
@@ -42,8 +45,8 @@ const ProductListing = () => {
       selectedCategory === "All" ? null : selectedCategory,
       priceRange);
     console.log('ProductListing - applyFilters result:', filtered.length, 'products for category:', selectedCategory);
-  const ref = useRef(null);
-
+    setFilterProducts(filtered);
+  };
   const handleRef = () => {
     if (ref.current && typeof ref.current.focus === "function")
       ref.current.focus();
@@ -137,7 +140,7 @@ const ProductListing = () => {
       </div>
     </div>
     </>
-    // </div>
   );
-};
+}
+
 export default ProductListing;

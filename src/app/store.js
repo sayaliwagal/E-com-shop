@@ -3,7 +3,7 @@ import cartReducer from '../Features/cart/cartSlice.js';
 import wishlistReducer from '../Features/wishlist/wishlistSlice.js';
 import themeReducer from '../Features/theme/themeSlice.js';
 import { loadState, saveState } from '../Utils/localStorage.js';
-
+import ProductReducer from "../Features/product/productSlice.js";
 const persistedState = loadState();
 
 // Middleware to handle theme DOM manipulation
@@ -31,6 +31,7 @@ export const store = configureStore({
         cart: cartReducer,
         wishList: wishlistReducer,
         theme: themeReducer,
+        products: ProductReducer,
     },
     preloadedState: persistedState,
     middleware: (getDefaultMiddleware) =>

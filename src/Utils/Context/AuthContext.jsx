@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
  //Login 
 
  const login = (email, password) =>{
-    const users = JSON.parse(localStorage.getItem("users"));
+    let users = JSON.parse(localStorage.getItem("users"));
 
     if(!users) users = [];
 
