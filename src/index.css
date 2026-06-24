@@ -7,9 +7,12 @@
 html,
 body,
 #root {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 @keyframes pingOnce {
@@ -42,3 +45,4 @@ body,
     width: 20px;
     border-radius: 9999px;
 }
+

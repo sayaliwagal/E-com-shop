@@ -14,7 +14,7 @@ const ThemeToggle = () => {
   return (
     <button 
     onClick={handleToggle}
-    className="p-2 text-xl rounded-md border border-slate-400 dark:border-slate-700 hover:bg-slate-300 dark:hover:bg-slate-800 transition-all"
+    className="p-1 text-xl rounded-md border border-slate-400 dark:border-slate-700 hover:bg-slate-300 dark:hover:bg-slate-800 transition-all"
     aria-label="Toggle theme">
      {themeItems.mode === "dark" ?(
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react'
-import Header from '../Components/Header'
+import Header from '../Components/Header.jsx'
 import Footer from '../Components/Footer'
 const OurStory = lazy(() => import("../Components/OurStory"))
 

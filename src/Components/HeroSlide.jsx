@@ -19,8 +19,8 @@ const HeroSlide = ({ title, tag, image, subtitle,cta, onCtaClick }) => {
      });
 
   return (
-     <section className="w-full h-[450px] md:h-[600px]">
-        <div className="h-full w-full bg-cover bg-center"
+     <section className="w-full max-w-full overflow-hidden h-[450px] md:h-[600px]">
+        <div className="h-full w-full max-w-full bg-cover bg-center overflow-hidden relative"
         style={{ backgroundImage:`url(${image})`}}>
           {/* overlay */}
           <div className="h-full w-full bg-black/50 flex items-center">

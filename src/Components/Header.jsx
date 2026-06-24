@@ -1,4 +1,4 @@
-import { NavLink /*, useNavigate*/ } from "react-router";
+import { NavLink, Link } from "react-router";
 import logo from "../assets/e-com-logo.png";
 import { useContext, useState } from "react";
 // import useOnline from "../Utils/useOnline";
@@ -9,20 +9,20 @@ import { FaRegHeart } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import ThemeToggle from "./ThemeToggle.jsx";
 import { useAuth } from "../Utils/Context/AuthContext.jsx";
-import { Link } from "react-router";
 import { useSelector } from "react-redux";
+import SearchBar from "./SearchBar.jsx";
 
 const Header = () => {
   // const [isLogedin, setIsLogedin] = useState(false);
-  // const { wishList, const 
-  const {auth } = useContext(CartContext);
+  // const { wishList, const
+  const { auth } = useContext(CartContext);
   const [open, setOpen] = useState(false);
   // const navigate = useNavigate();
-const { user, logout } = useAuth();
+  const { user, logout } = useAuth();
 
-const cartItems = useSelector((state) => state.cart.items);
-const wishListItems = useSelector((state) => state.wishList.items);
-// console.log(cartItems);
+  const cartItems = useSelector((state) => state.cart.items);
+  const wishListItems = useSelector((state) => state.wishList.items);
+  // console.log(cartItems);
 
   // const move = () => {
   //   if (isLogedin) {
@@ -32,100 +32,124 @@ const wishListItems = useSelector((state) => state.wishList.items);
   //   }
   // };
   // const isOnline = useOnline();
-  return (
-    <div className="flex">
-      <header className="bg-gray-800 text-white w-full shadow-md sticky top-0 z-50">
-        <nav className="flex justify-between item-center px-5 py-4 md:px-12">
-          <div className="flex w-full items-center justify-between gap-3">
-            <img src={logo} alt="logo" className="h-20 w-auto" />
-            {/* Desktop NavLink */}
-            <ul className="hidden lg:flex font-semibold text-xl gap-10">
-              {["/", "/about", "/contact", "/blog"].map((path, i) => (
-                <li key={i}>
-                  <NavLink
-                    to={path}
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-yellow-400 border-b-2 border-yellow-400 pb-1"
-                        : "hover:text-purple-300"
-                    }
-                  >
-                    {path === "/"
-                      ? "Home"
-                      : path.replace("/", "").charAt(0).toUpperCase() +
-                        path.slice(2)}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
 
-            {/* Right Icons and Buttons */}
-            <div className="flex items-center gap-3 md:justify-around">
+  const naveLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+    { name: "Blog", path: "/blog" },
+  ];
+  return (
+    <header className="sicky top-0 z-50 shadow-md">
+      {/* Top Bar */}
+      <div className="bg-gray-800 text-white">
+        <div className="max-w-10xl mx-auto px-4 lg:px-6 py-3">
+          <div className="flex items-center justify-between gap-4">
+            {/* Logo */}
+            <Link to="/" className="">
+              <img
+                src={logo}
+                alt="E-Commerce Logo"
+                className="h-12 lg:h-14 w-auto object-contain"
+              />
+            </Link>
+            {/* Search Bar */}
+            <div className="hidden md:flex flex-1 max-w-xs  h-10 ">
+              <SearchBar />
+            </div>
+            {/*Right Section */}
+            <div className="flex items-center gap-5">
+              {/* Wishlist */}
               <NavLink
-                to={"/cart"}
-                className="hover:bg-yellow-500 flex relative p-5  rounded-full  hover:text-slate-200"
+                to="/wishlist"
+                className="relative p-2 rounded-full hover:bg-yellow-500 transition-colors"
               >
-                <BsCart2 size={30} />
-                <span className="absolute top-1 right-3 bg-red-500 text-white text-xs rounded-full px-2">
-                  {cartItems.length}
-                </span>
-              </NavLink>
-              <NavLink
-                to={"/wishlist"}
-                className="hover:bg-yellow-500 flex relative p-5  rounded-full  hover:text-slate-200"
-              >
-                <FaRegHeart size={30} />
-                <span className="absolute top-1 right-3 bg-red-500 text-white text-xs rounded-full px-2">
+                <FaRegHeart size={20} />
+                <span className="absolute -top-2 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
                   {wishListItems.length}
                 </span>
               </NavLink>
-              <div className="mx-9">
-              <ThemeToggle/>
-              </div>
-              {!user ? (
-                <>
-                <Link 
-                to= "/login"
-                className="px-4 py-2 border rounded">
-                  Login
-                </Link>
-                <Link 
-                to= "/signup"
-                className="px-4 py-2 bg-yellow-500 rounded ">
-                  Signup
-                </Link>
-                  </>
-              ): (
-                <>
-                <span className="font-semibold">
-                  Hi, {user.name}
+              {/* Cart */}
+              <NavLink
+                to="/cart"
+                className="relative p-2 rounded-full hover:bg-yellow-500 transition-colors"
+              >
+                <BsCart2 size={20} />
+                <span className="absolute -top-2 -right-1 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartItems.length}
                 </span>
-                <button
-                 onClick={logout}
-                 className="px-4 py-2 border rounded">
+              </NavLink>
+              <ThemeToggle />
+
+              {/* User Authentication */}
+              {!user ? (
+                <div className="hidden md:flex items-center gap-2">
+                  <Link
+                    to="/login"
+                    className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              ) : (
+                <div className="hidden lg:flex items-center gap-2">
+                  <span className="font-medium truncate max-w-[140px]">
+                    Hi, {user.name.split(" ")[0]}
+                  </span>
+                  <button
+                    onClick={logout}
+                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                  >
                     Logout
-                 </button>
-                </>
+                  </button>
+                </div>
               )}
+              {/* Mobile Menu  */}
+              <button
+                onClick={() => setOpen(!open)}
+                className="lg:hidden">
+                <GiHamburgerMenu size={24} />
+              </button>
             </div>
           </div>
-          {/* Responsive navbar */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="lg:hidden  mr-2 items-center"
-          >
-            <GiHamburgerMenu className="h-8 w-8 hover:text-gray-200" />
-          </button>
-        </nav>
-      </header>
-      <ResponsiveMenu
-        className="xl:hidden"
-        open={open}
-        setOpen={setOpen}
-        auth={auth}
-        logout={logout}
-      />
-    </div>
+        </div>
+      </div>
+      {/* Bottom Navigation Bar */}
+      <div className="hidden lg:block bg-gray-700 text-white ">
+        <div className="max-w-7xl mx-auto px-6">
+          <ul className="flex items-center gap-8 h-12 font-medium">
+            <li className="flex items-center gap-2 cursor-pointer hover:text-yellow-400">
+              <GiHamburgerMenu size={20} />
+              categories
+            </li>
+            {naveLinks.map((link) => (
+              <li key={link.name}>
+                <NavLink
+                  to={link.path}
+                  className={({ isActive }) =>
+                    isActive ? "text-yellow-400" : "hover:text-yellow-400"
+                  }
+                >
+                  {link.name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      {/* Responsive Menu */}
+      <ResponsiveMenu 
+      open={open} 
+      setOpen={setOpen}
+      auth={auth}
+      logout={logout} />
+    </header>
   );
 };
 
