@@ -72,7 +72,7 @@ export const banners = [
     title: "Men’s Wear",
     subtitle: "New styles at unbeatable prices",
     cta: "Shop Men",
-    image: "https://images.unsplash.com/photo-1521334884684-d80222895322",
+    image: "https://www.alexinternational.ro/wp-content/uploads/2016/02/BANNER-MENS-CLOTHING-1170x400.jpg",
     category: "mens-shirts"
   },
   {
@@ -91,7 +91,7 @@ export const banners = [
     subtitle: "Glow with top beauty brands",
     cta: "Explore Beauty",
     image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9",
-    category: "skincare"
+    category: "beauty"
   },
   {
     id: 6,
@@ -108,26 +108,26 @@ export const banners = [
     title: "Kitchen Appliances",
     subtitle: "Make cooking effortless",
     cta: "View Appliances",
-    image: "https://images.unsplash.com/photo-1586201375761-83865001e17b",
-    category: "home-decoration"
+    image: "https://img.magnific.com/premium-photo/set-dishes-closeup-colored-background-kitchen-appliances_441923-3352.jpg",
+    category: "kitchen-accessories"
   },
   {
     id: 8,
-    tag: "Fitness Zone",
-    title: "Gym & Sports",
-    subtitle: "Gear up for a healthier life",
-    cta: "Shop Fitness",
-    image: "https://images.unsplash.com/photo-1599058917212-d750089bc07e",
-    category: "sports-accessories"
+    tag: "Fragrance Collection",
+    title: "Fragrances",
+    subtitle: "good fragrances good you!",
+    cta: "Shop Fragrances",
+    image: "https://www.shutterstock.com/image-photo/home-comfort-coziness-aromatherapy-cozy-260nw-2369015735.jpg",
+    category: "fragrances"
   },
   {
     id: 9,
-    tag: "Kids Special",
-    title: "Toys & Games",
+    tag: "Sports & Fun",
+    title: "Outdoor Gear",
     subtitle: "Fun learning for kids",
-    cta: "Shop Toys",
-    image: "https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8",
-    category: "toys"
+    cta: "Shop Sports accessories",
+    image: "https://thumbs.dreamstime.com/b/banner-featuring-sports-equipment-like-basketball-football-ball-baseball-bat-tennis-racket-badminton-shuttlecocks-318921991.jpg",
+    category: "sports-accessories"
   },
   {
     id: 10,

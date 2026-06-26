@@ -11,7 +11,7 @@ export const ProductProvider = ({ children }) => {
   const { data, loading, error } = useCallApi(
     "https://dummyjson.com/products?limit=0"
   );
-
+    
   useEffect (() => {
     if(!data?.products) return;
 

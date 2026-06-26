@@ -13,9 +13,9 @@ const ResponsiveMenu = ({ open, setOpen, auth, logout }) => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
           transition={{ duration: 0.3 }}
-          className="fixed top-20 left-0 w-full h-[calc(100vh-5rem)] z-50 bg-gray-800 flex flex-col items-center justify-center"
+          className="fixed left-0 w-full h-[calc(100vh-5rem)] z-50 bg-gray-800 flex flex-col items-center justify-center"
         >
-          <div className="text-xl font-semibold uppercase bg-gray-800 text-white py-10 m-8 rounded-3xl">
+          <div className="text-xl font-semibold uppercase bg-gray-800 text-white py-10 rounded-3xl">
             <ul className="flex flex-col justify-center items-center gap-10">
               {["/", "/about", "/contact", "/blog"].map((path, i) => (
                 <li key={i} onClick={closeMenu}>

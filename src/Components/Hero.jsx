@@ -36,7 +36,7 @@ const Hero = () => {
               key={banner.id}
               {...banner}
               onCtaClick={() => {
-                navigate(`/category/${banner.category}`);
+                navigate(`/products/${encodeURIComponent(banner.category)}`);
               }}
             />
           ))}

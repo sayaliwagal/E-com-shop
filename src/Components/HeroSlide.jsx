@@ -47,13 +47,23 @@ const HeroSlide = ({ title, tag, image, subtitle,cta, onCtaClick }) => {
             )}
             {cta && (
 
-              <animated.button 
-              style={buttonAnimation}
-              className="bg-yellow-600 text-black px-6 py-3 rounded font-semibold"
-                       onClick={onCtaClick}
-              >
-              {cta}
-            </animated.button>
+            //   <animated.button 
+            //   style={buttonAnimation}
+            //   className="bg-yellow-600 text-black px-6 py-3 rounded font-semibold"
+            //            onClick={onCtaClick}
+            //   >
+            //   {cta}
+            // </animated.button>
+            <animated.button
+  style={buttonAnimation}
+  className="bg-yellow-600 text-black px-6 py-3 rounded font-semibold"
+  onClick={() => {
+    console.log("CTA Clicked");
+    onCtaClick();
+  }}
+>
+  {cta}
+</animated.button>
             )}
           </div>
           </div>
