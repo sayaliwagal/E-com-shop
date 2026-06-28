@@ -147,6 +147,7 @@ const Header = () => {
       <ResponsiveMenu 
       open={open} 
       setOpen={setOpen}
+      user={user}
       auth={auth}
       logout={logout} />
     </header>

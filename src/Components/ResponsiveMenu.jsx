@@ -3,8 +3,10 @@ import { NavLink } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { button } from "motion/react-client";
 
-const ResponsiveMenu = ({ open, setOpen, auth, logout }) => {
+
+const ResponsiveMenu = ({ open, setOpen, auth, logout, user }) => {
   const closeMenu = () => setOpen(false);
+ 
   return (
     <AnimatePresence mode="wait">
       {open && (
@@ -16,7 +18,14 @@ const ResponsiveMenu = ({ open, setOpen, auth, logout }) => {
           className="fixed left-0 w-full h-[calc(100vh-5rem)] z-50 bg-gray-800 flex flex-col items-center justify-center"
         >
           <div className="text-xl font-semibold uppercase bg-gray-800 text-white py-10 rounded-3xl">
+          
             <ul className="flex flex-col justify-center items-center gap-10">
+                {user ?
+              <span className="font-medium truncate max-w-[140px] text-center left-2.5">
+                Hi, {user.name.split(" ")[0]}!
+                </span>
+                : <span className="font-medium truncate max-w-[140px]">Welcome!</span>
+              }
               {["/", "/about", "/contact", "/blog"].map((path, i) => (
                 <li key={i} onClick={closeMenu}>
                   <NavLink
@@ -35,14 +44,23 @@ const ResponsiveMenu = ({ open, setOpen, auth, logout }) => {
                 </li>
               ))}
               <li>
-                {!auth ? (
-                  <NavLink
+                {!user ? (
+                  <div className="flex flex-col gap-4 w-full px-6">
+                      <NavLink
                     to="/login"
                     onClick={closeMenu}
-                    className="bg-yellow-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-red-400"
+                    className="bg-yellow-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-yellow-400"
                   >
                     Login
                   </NavLink>
+                   <NavLink
+                    to="/signup"
+                    onClick={closeMenu}
+                    className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors"
+                  >
+                    Sign Up
+                  </NavLink>
+                  </div>
                 ) : (
                   <button
                     onClick={() => {
