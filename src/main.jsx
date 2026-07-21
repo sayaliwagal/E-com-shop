@@ -10,17 +10,20 @@ import { ProductProvider } from "./Utils/Context/ProductContext.jsx";
 import { AuthProvider } from "./Utils/Context/AuthContext.jsx";
 import { Provider } from "react-redux";
 import { store } from "./app/store.js";
+import { SearchProvider } from "./Utils/Context/SearchContext.jsx";
 
 createRoot(document.getElementById("root")).render(
     <BrowserRouter>
         <AuthProvider>
           <CartProvider>
         <ProductProvider>
-          <Provider store={store}>
-            <DynamicTitle />
-            <Layout />
-            <Toaster />
-          </Provider>
+          <SearchProvider>
+            <Provider store={store}>
+              <DynamicTitle />
+                <Layout />
+                <Toaster />
+            </Provider>
+          </SearchProvider>
         </ProductProvider>
           </CartProvider>
         </AuthProvider>

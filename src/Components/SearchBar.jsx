@@ -3,22 +3,27 @@ import { IoSearchSharp } from "react-icons/io5";
 
 const SearchBar = forwardRef(({searchText, setSearchText, onSearch}, ref) => {
   return (
-   <div className="flex rounded-full border-2 border-blue-500 dark:border-slate-700 overflow-hidden max-w-md mx-auto">
+   <div className="flex w-4xl max-w-5xl h-10 rounded-md overflow-hidden border-2 border-transparent focus-within:border-orange-600">
+        <select className="bg-gray-300 px-3 text-sm outline-none border-r cursor-pointer">
+          <option value="all">All</option>
+          <option value="electronics">Electronics</option>
+          <option value="fashion">Fashion</option>
+        </select>
          <input
            type="search"
            placeholder="Search Here...."
            value={searchText}
            onChange={(e) => setSearchText(e.target.value)}
            ref={ref}
-           className="w-full outline-none bg-slate-100 dark:bg-slate-800 text-xl font-bold text-gray-950 dark:text-slate-50 px-5 py-3"
+           className="min-w-0 flex-1 px-4 outline-none"
          />
          <button
            onClick={onSearch}
-           className="flex items-center rounded-r-full justify-center bg-blue-600 dark:bg-slate-600 hover:bg-blue-700 dark:hover:bg-slate-700 px-6 text-slate-50"
+            className="w-[56px] min-w-[56px] h-full shrink-0 flex items-center justify-center bg-[#febd69] hover:bg-[#F3A847] text-gray-800"
          >
-          <IoSearchSharp size={30} />
+          <IoSearchSharp size={22} />
          </button>
-         </div>
+      </div>
  
   );
 });

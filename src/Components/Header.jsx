@@ -9,8 +9,11 @@ import { FaRegHeart } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import ThemeToggle from "./ThemeToggle.jsx";
 import { useAuth } from "../Utils/Context/AuthContext.jsx";
+import { useSearch } from "../Utils/Context/SearchContext.jsx";
 import { useSelector } from "react-redux";
 import SearchBar from "./SearchBar.jsx";
+import { BiMobile } from "react-icons/bi";
+import { useNavigate } from "react-router";
 
 const Header = () => {
   // const [isLogedin, setIsLogedin] = useState(false);
@@ -19,9 +22,14 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   // const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { searchText, setSearchText } = useSearch();
 
   const cartItems = useSelector((state) => state.cart.items);
   const wishListItems = useSelector((state) => state.wishList.items);
+  const navigate = useNavigate();
+  const handleSearch = () => {
+    navigate(`/products?search=${searchText}`);
+  }
   // console.log(cartItems);
 
   // const move = () => {
@@ -40,11 +48,50 @@ const Header = () => {
     { name: "Blog", path: "/blog" },
   ];
   return (
-    <header className="sicky top-0 z-50 shadow-md">
+    <header className="sicky top-0 z-50 shadow-md font-sans">
       {/* Top Bar */}
       <div className="bg-gray-800 text-white">
-        <div className="max-w-10xl mx-auto px-4 lg:px-6 py-3">
-          <div className="flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 py-3">
+          {/* Mobile first view  */}
+          <div className="flex md:!hidden flex-wrap items-center justify-between gap-3">
+            {/* Logo */}
+            <Link
+              to="/"
+              className="shrink-0 border border-transparent hover:border-white rounded p-1"
+            >
+              <img
+                src={logo}
+                alt="E-Commerce Logo"
+                className="h-15 object-contain"
+              />
+            </Link>
+            <div className="order-last basis-full min-w-0 flex-1 max-w-none h-10">
+              <SearchBar 
+                searchText = {searchText}
+                setSearchText = {setSearchText}
+                onSearch={handleSearch}
+              />
+            </div>
+            <NavLink to="/cart" className="relative shrink-0 p-1">
+              <BsCart2 size={24} />
+              <span className="absolute -top-1.5 -right-1.5 bg-yellow-500 text-gray-800 text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                {cartItems.length}
+              </span>
+            </NavLink>
+            <NavLink to="/wishlist" className="relative shrink-0 p-1">
+              <FaRegHeart size={24} />
+              <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                {wishListItems.length}
+              </span>
+            </NavLink>
+            <ThemeToggle />
+            <button onClick={() => setOpen(!open)} className="lg:hidden">
+              <GiHamburgerMenu size={24} />
+            </button>
+
+          </div>
+
+          <div className="hidden md:flex items-center justify-between gap-4">
             {/* Logo */}
             <Link to="/" className="">
               <img
@@ -54,8 +101,12 @@ const Header = () => {
               />
             </Link>
             {/* Search Bar */}
-            <div className="hidden md:flex flex-1 max-w-xs  h-10 ">
-              <SearchBar />
+            <div className="hidden md:flex flex-1 max-w-xs">
+              <SearchBar 
+                searchText = {searchText}
+                setSearchText = {setSearchText}
+                onSearch={handleSearch}
+              />
             </div>
             {/*Right Section */}
             <div className="flex items-center gap-5">
@@ -111,9 +162,7 @@ const Header = () => {
                 </div>
               )}
               {/* Mobile Menu  */}
-              <button
-                onClick={() => setOpen(!open)}
-                className="lg:hidden">
+              <button onClick={() => setOpen(!open)} className="lg:hidden">
                 <GiHamburgerMenu size={24} />
               </button>
             </div>
@@ -144,12 +193,13 @@ const Header = () => {
         </div>
       </div>
       {/* Responsive Menu */}
-      <ResponsiveMenu 
-      open={open} 
-      setOpen={setOpen}
-      user={user}
-      auth={auth}
-      logout={logout} />
+      <ResponsiveMenu
+        open={open}
+        setOpen={setOpen}
+        user={user}
+        auth={auth}
+        logout={logout}
+      />
     </header>
   );
 };

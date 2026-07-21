@@ -27,12 +27,11 @@ import { ImPower } from 'react-icons/im';
 
 
 const Layout = () => {
-  //lift search 
-   const [searchText, setSearchText] = useState("");
+ 
    
   return (
     <>
-     <Header searchText={searchText} setSearchText={setSearchText}/>
+     <Header/>
 
      <Routes>
       {/* Static route */}

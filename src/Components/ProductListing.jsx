@@ -7,13 +7,14 @@ import SearchBar from "./searchBar.jsx";
 import Filters from "./Filters.jsx";
 import { useParams } from "react-router";
 import { useProducts } from "../Utils/Context/ProductContext.jsx";
+import { useSearch } from "../Utils/Context/SearchContext.jsx";
 
 const ProductListing = () => {
 
  const { category } = useParams();
   // const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
-  const [searchText, setSearchText] = useState("");
+  const {searchText } = useSearch();
  
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [priceRange, setPriceRange] = useState([0, 2000]);
@@ -105,12 +106,11 @@ const ProductListing = () => {
       <div className="w-full rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-8 mb-6">
         {/* Search Section  */}
         <div className="flex-1">
-          <SearchBar
+          {/* <SearchBar
             searchText={searchText}
-            setSearchText={setSearchText}
             onSearch={applyFilters}
             ref={ref}
-          />
+          /> */}
         </div>
         <div className="flex flex-wrap items-center gap-4">
           <Filters
