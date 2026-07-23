@@ -10,6 +10,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import ThemeToggle from "./ThemeToggle.jsx";
 import { useAuth } from "../Utils/Context/AuthContext.jsx";
 import { useSearch } from "../Utils/Context/SearchContext.jsx";
+import { useProducts } from "../Utils/Context/ProductContext.jsx";
 import { useSelector } from "react-redux";
 import SearchBar from "./SearchBar.jsx";
 import { BiMobile } from "react-icons/bi";
@@ -22,13 +23,13 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   // const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const { searchText, setSearchText } = useSearch();
-
+  const { searchText, setSearchText, selectedCategory, setSelectedCategory } = useSearch();
+  const {categories } = useProducts();
   const cartItems = useSelector((state) => state.cart.items);
   const wishListItems = useSelector((state) => state.wishList.items);
   const navigate = useNavigate();
   const handleSearch = () => {
-    navigate(`/products?search=${searchText}`);
+    navigate(`/products?search=${searchText}&category=${selectedCategory}`);
   }
   // console.log(cartItems);
 
@@ -48,7 +49,7 @@ const Header = () => {
     { name: "Blog", path: "/blog" },
   ];
   return (
-    <header className="sicky top-0 z-50 shadow-md font-sans">
+    <header className="sticky top-0 z-50 shadow-md font-sans">
       {/* Top Bar */}
       <div className="bg-gray-800 text-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-6 py-3">
@@ -65,11 +66,15 @@ const Header = () => {
                 className="h-15 object-contain"
               />
             </Link>
-            <div className="order-last basis-full min-w-0 flex-1 max-w-none h-10">
+            <div className="order-last w-full mt2 md:!hidden">
               <SearchBar 
                 searchText = {searchText}
                 setSearchText = {setSearchText}
                 onSearch={handleSearch}
+                categories={categories}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                
               />
             </div>
             <NavLink to="/cart" className="relative shrink-0 p-1">
@@ -101,10 +106,13 @@ const Header = () => {
               />
             </Link>
             {/* Search Bar */}
-            <div className="hidden md:flex flex-1 max-w-xs">
+            <div className="hidden md:flex flex-1 max-w-lg">
               <SearchBar 
                 searchText = {searchText}
                 setSearchText = {setSearchText}
+                categories={categories}
+                selectedCtegory={selectedCategory}
+                setSelectedCategory = {setSelectedCategory}
                 onSearch={handleSearch}
               />
             </div>

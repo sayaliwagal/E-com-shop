@@ -5,16 +5,18 @@ import { filterValues, filterByCategoryAndPrice } from "../Utils/helper.js";
 import Error from "../Pages/Error.jsx";
 import SearchBar from "./searchBar.jsx";
 import Filters from "./Filters.jsx";
-import { useParams } from "react-router";
+import { useParams, useSearchParams } from "react-router";
 import { useProducts } from "../Utils/Context/ProductContext.jsx";
 import { useSearch } from "../Utils/Context/SearchContext.jsx";
 
 const ProductListing = () => {
 
  const { category } = useParams();
+ const [searchParams] = useSearchParams();
   // const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
-  const {searchText } = useSearch();
+  const searchText = searchParams.get("search") || "";
+  const categorys = searchParams.get("category") || "All";
  
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [priceRange, setPriceRange] = useState([0, 2000]);

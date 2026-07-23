@@ -28,7 +28,7 @@ const Hero = () => {
     ),
   };
   return (
-    <section className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[550px] overflow-hidden">
+    <section className="w-full  md:h-[500px] lg:h-[550px] overflow-hidden">
       <div className="overflow-hidden">
         <Slider {...setting}>
           {banners.map((banner) => (
