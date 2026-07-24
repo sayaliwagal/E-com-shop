@@ -63,7 +63,7 @@ const Header = () => {
               <img
                 src={logo}
                 alt="E-Commerce Logo"
-                className="h-15 object-contain"
+                className="w-20 object-contain"
               />
             </Link>
             <div className="order-last w-full mt2 md:!hidden">

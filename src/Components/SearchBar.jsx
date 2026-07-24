@@ -3,8 +3,8 @@ import { IoSearchSharp } from "react-icons/io5";
 
 const SearchBar = forwardRef(({searchText, setSearchText, selectedCategory, setSelectedCategory, categories, onSearch}, ref) => {
   return (
-   <div className="flex w-full  h-10 rounded-md overflow-hidden border-2 border-transparent focus-within:border-orange-600">
-        <select className="bg-gray-300 text-sm outline-none border-r cursor-pointer"
+   <div className="flex w-full  h-10 bg-white rounded-md overflow-hidden border-2 border-gray-300 focus-within:border-orange-600 focus-within:rign-2 focus-within:rign-orange-300">
+        <select className="w-24 bg-gray-200 text-gray-700  text-sm outline-none border-r border-gray-300 cursor-pointer"
           value={selectedCategory}
           onChange={(e)=> setSelectedCategory(e.target.value)}>
             <option value="All">All</option>
@@ -21,7 +21,7 @@ const SearchBar = forwardRef(({searchText, setSearchText, selectedCategory, setS
            value={searchText}
            onChange={(e) => setSearchText(e.target.value)}
            ref={ref}
-           className="min-w-1 flex-1 px-5 outline-none"
+           className="flex-1 min-w-0 px-4 text-sm bg-white text-gray-800 outline-none"
          />
          <button
            onClick={onSearch}
