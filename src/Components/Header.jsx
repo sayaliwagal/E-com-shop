@@ -180,11 +180,7 @@ const Header = () => {
       {/* Bottom Navigation Bar */}
       <div className="hidden lg:block bg-gray-700 text-white ">
         <div className="max-w-7xl mx-auto px-6">
-          <ul className="flex items-center gap-8 h-12 font-medium">
-            <li className="flex items-center gap-2 cursor-pointer hover:text-yellow-400">
-              <GiHamburgerMenu size={20} />
-              categories
-            </li>
+          <ul className="flex items-center gap-12 h-10 font-medium justify-center">
             {naveLinks.map((link) => (
               <li key={link.name}>
                 <NavLink
