@@ -11,23 +11,23 @@ import { useSearch } from "../Utils/Context/SearchContext.jsx";
 
 const ProductListing = () => {
 
- const { category } = useParams();
- const [searchParams] = useSearchParams();
+  const { category } = useParams();
+  const [searchParams] = useSearchParams();
   // const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
   const searchText = searchParams.get("search") || "";
   const categorys = searchParams.get("category") || "All";
- 
+
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [priceRange, setPriceRange] = useState([0, 2000]);
- 
+
   // const [loading, setLoading] = useState(true);
 
   const { products, loading, error, categories } = useProducts();
   const ref = useRef(null);
 
   useEffect(() => {
-    console.log('ProductListing useEffect - category from URL:', category, 'selectedCategory will be:', category || "All");
+    // console.log('ProductListing useEffect - category from URL:', category, 'selectedCategory will be:', category || "All");
 
     if (category) {
       setSelectedCategory(category);
@@ -47,7 +47,7 @@ const ProductListing = () => {
       filtered,
       selectedCategory === "All" ? null : selectedCategory,
       priceRange);
-    console.log('ProductListing - applyFilters result:', filtered.length, 'products for category:', selectedCategory);
+    // console.log('ProductListing - ap/zplyFilters result:', filtered.length, 'products for category:', selectedCategory);
     setFilterProducts(filtered);
   };
   const handleRef = () => {
@@ -55,32 +55,39 @@ const ProductListing = () => {
       ref.current.focus();
     // ref.current.style.backgroundColor ="gray"
   };
-
   useEffect(() => {
     handleRef();
   }, []);
+
+  // Shared grid classes — same breakpoints used for skeletons AND real cards,
+  // so the layout doesn't jump/reflow the moment loading finishes.
+
+  const gridClasses = "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6";
+
   //Loading UI
   if (loading) {
     return (
-      <div className="max-w-10xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <h3 className="text-3xl font-semibold text-center text-gray-800 dark:text-white mb-8">
           Loading Products.....
         </h3>
-        <div className="flex flex-wrap justify-center gap-8 px-4 md:px-6 mt-4">
-          {Array.from({ length: 30 }).map((item, index) => {
+        <div className={`${gridClasses} px-4 md:px-6 mt-4`}>
+          {Array.from({ length: 12 }).map((item, index) => {
             return (
               <div
                 key={index}
-                className="w-[230px] h-[300px] bg-amber-100 rounded-2xl shadow-sm p-4 flex flex-col items-center"
+                className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-sm p-4 flex flex-col items-center"
               >
                 <ShimmerThumbnail
                   index={item}
-                  height={180}
-                  width={200}
-                  className="rounded-xl"
+                  height={160}
+                  width="100%"
+                  className="rounded-md"
                 />
                 <div className="mt-4 w-3/4 h-3 bg-gray-200 rounded"></div>
-                <div className="mt-2 w-1/2 h-3 bg-gray-200 rounded"></div>
+                <div className="mt-4 w-3/4 h-3 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                <div className="mt-2 w-1/2 h-3 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                <div className="mt-2 w-1/2 h-3 bg-gray-200 dark:bg-gray-700 rounded"></div>
               </div>
             );
           })}
@@ -99,21 +106,20 @@ const ProductListing = () => {
   }
   //Main Render
   return (
-    <>
 
-    <div className="max-w-10xl mx-auto px-4 py-8">
+    <section className="max-w-7xl mx-auto px-4 py-8">
       <h3 className="text-3xl font-semibold text-center text-gray-800  dark:text-white mb-8">
-        {category ? `${category} Products`: "All Products"}
+        {category ? `${category} Products` : "All Products"}
       </h3>
       <div className="w-full rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-8 mb-6">
         {/* Search Section  */}
-        <div className="flex-1">
+        {/* <div className="flex-1"> */}
           {/* <SearchBar
             searchText={searchText}
             onSearch={applyFilters}
             ref={ref}
           /> */}
-        </div>
+        {/* </div> */}
         <div className="flex flex-wrap items-center gap-4">
           <Filters
             categories={categories}
@@ -124,24 +130,19 @@ const ProductListing = () => {
           />
         </div>
       </div>
+      {filterProducts.length > 0 ? (
 
-      <div className="flex flex-wrap justify-center gap-6 px-4 md:px-6 mt-4">
-        {filterProducts.length > 0 ? (
-          filterProducts?.map((item) => {
-            return (
-              <Card key={item.id} products={item}>
-                {/* <p>hello</p> */}
-              </Card>
-            );
-          })
-        ) : (
-          <p className="text-gray-500 text-xl mt-10">
-            No Products match your filters.
-          </p>
-        )}
-      </div>
-    </div>
-    </>
+        <div className={`${gridClasses} px-4 md:px-6 mt-4`}>
+          {filterProducts?.map((item) => (
+            <Card key={item.id} products={item}></Card>
+          ))}
+        </div>
+      ) : (
+        <p className="text-gray-500 text-xl mt-10">
+          No Products match your filters.
+        </p>
+      )}
+    </section>
   );
 }
 
