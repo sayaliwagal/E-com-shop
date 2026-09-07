@@ -40,7 +40,7 @@ export const Card = (props) => {
                 <div className="flex flex-col gap-1 px-3 pt-2 pb-1 flex-1">
                     <p className="text-sm font-medium text-gray-800 dark:text-gray-100">{title}</p>
                     <h3 className="text-[11px] uppercase tracking-wide text-gray-400 dark:text-gray-500">{category}</h3>
-                    <p className="text-lg font-bold text-gray-900 dark:white mt-1">
+                    <p className="text-lg font-bold text-gray-900 dark:text-white mt-1">
                       $ {price}
                       </p>
                          {/* Rating pill — Flipkart-style green badge */}
